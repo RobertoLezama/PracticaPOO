@@ -12,7 +12,7 @@ namespace PracticaPOO
 	{
 		public Enums.Grano Tipo { get; set; }
 
-		public Grano() : base("Grano", 100, 1) { }
+		public Grano() : base("Grano", 300, 1) { }
 
 		public Grano(Enums.Grano tipo) : this()
 		{
