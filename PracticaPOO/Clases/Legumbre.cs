@@ -18,5 +18,10 @@ namespace PracticaPOO
 		{
 			this.Tipo = tipo;
 		}
+
+		/*public void producir
+        {
+
+        }*/
 	}
 }
