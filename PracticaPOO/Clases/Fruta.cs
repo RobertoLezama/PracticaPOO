@@ -12,7 +12,7 @@ namespace PracticaPOO
     {
 		public Enums.Fruta Tipo { get; set; }
 
-		public Fruta() : base("Fruta", 100, 1) { }
+		public Fruta() : base("Fruta", 400, 1) { }
 
 		public Fruta (Enums.Fruta tipo) : this()
 		{
