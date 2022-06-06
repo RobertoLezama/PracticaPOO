@@ -12,7 +12,7 @@ namespace PracticaPOO
     {
 		public Enums.Legumbre Tipo { get; set; }
 
-		public Legumbre() : base("Legumbre", 100, 1) { }
+		public Legumbre() : base("Legumbre", 500, 1) { }
 
 		public Legumbre(Enums.Legumbre tipo) : this()
 		{
