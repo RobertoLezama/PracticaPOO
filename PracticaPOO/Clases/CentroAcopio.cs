@@ -21,6 +21,10 @@ namespace PracticaPOO
 
         public int TotalBodegasVacias => Capacidad - productos.Count;
 
+        /// <summary>
+        /// Inicializa una instancia de un Centro de Acopio
+        /// </summary>
+        /// <param name="capacidad">Cantidad de espacios de almacenamiento en las bodegas inicialmente</param>
         public CentroAcopio(int capacidad)
         {
             Capacidad = capacidad;

@@ -14,17 +14,17 @@
       <FileName>Clases\Camión.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PracticaPOO.CentroAcopio" Collapsed="true">
-    <Position X="22.75" Y="0.5" Width="1.5" />
+  <Class Name="PracticaPOO.CentroAcopio">
+    <Position X="21.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAhEAAAAAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Clases\CentroAcopio.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PracticaPOO.Cooperativa" Collapsed="true">
+  <Class Name="PracticaPOO.Cooperativa">
     <Position X="24.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABACAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAABQCAAAA=</HashCode>
       <FileName>Clases\Cooperativa.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -70,8 +70,8 @@
       <FileName>Clases\Legumbre.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PracticaPOO.Lote" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="22.75" Y="1.5" Width="1.5" />
+  <Class Name="PracticaPOO.Lote" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="1.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AABAAAAAAABAAAAAAAAAAAAAACAAAQAAAAAAAAAAAAA=</HashCode>
       <FileName>Clases\Lote.cs</FileName>
@@ -173,7 +173,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="PracticaPOO.IProductor" Collapsed="true">
-    <Position X="22.75" Y="2.75" Width="1.5" />
+    <Position X="25" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaz\IProductor.cs</FileName>

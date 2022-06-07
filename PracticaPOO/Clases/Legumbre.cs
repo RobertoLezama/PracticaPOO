@@ -1,14 +1,6 @@
-﻿using PracticaPOO.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static PracticaPOO.Program;
-
-namespace PracticaPOO
+﻿namespace PracticaPOO
 {
-   public class Legumbre : ProdVegetal
+    public class Legumbre : ProdVegetal
     {
 		public Enums.Legumbre Tipo { get; set; }
 

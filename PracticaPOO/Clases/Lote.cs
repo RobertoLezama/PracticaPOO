@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PracticaPOO
+﻿namespace PracticaPOO
 {
     public class Lote : IProductor
     {
 		Cooperativa cooperativa;
+
 		Producto producto { get; set; }
 
-		public Lote(Cooperativa coop)
+        public Lote(Cooperativa coop)
 		{
 			cooperativa = coop;
 
