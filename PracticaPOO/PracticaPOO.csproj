@@ -46,10 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clases\Cerdo.cs" />
+    <Compile Include="Clases\Corral.cs" />
+    <Compile Include="Clases\Gallinero.cs" />
     <Compile Include="Clases\Leche.cs" />
     <Compile Include="Clases\CentroAcopio.cs" />
     <Compile Include="Clases\Cooperativa.cs" />
     <Compile Include="Clases\FlotillaCamiones.cs" />
+    <Compile Include="Clases\Porqueriza.cs" />
+    <Compile Include="Clases\Res.cs" />
     <Compile Include="Clases\Tren.cs" />
     <Compile Include="Clases\Fruta.cs" />
     <Compile Include="Clases\Granja.cs" />
@@ -62,6 +67,7 @@
     <Compile Include="Enums\ProdAnimal.cs" />
     <Compile Include="Enums\Semilla.cs" />
     <Compile Include="Enums\Fabrica.cs" />
+    <Compile Include="Enums\TipoGranja.cs" />
     <Compile Include="Enums\TipoProducto.cs" />
     <Compile Include="Enums\TipoTransporte.cs" />
     <Compile Include="Interfaz\IProductor.cs" />
