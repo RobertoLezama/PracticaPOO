@@ -1,35 +1,39 @@
-﻿using System;
+﻿using PracticaPOO.UI;
+using System;
+using System.Collections.Generic;
 
 namespace PracticaPOO
 {
     public class Programa
     {
+        static Cooperativa coop = new Cooperativa();
+        static List<ConsoleMenuOption> opcionesMenu;
+
         static void Main()
         {
-            var coop = new Cooperativa();
+            InicializarCooperativa();
 
+            // Create options that you want your menu to have
+            opcionesMenu = new List<ConsoleMenuOption>
+            {
+                new ConsoleMenuOption("Opción 1", () => Console.WriteLine("Hola")),
+                new ConsoleMenuOption("Opción 2", () =>  Console.WriteLine("Mundo")),
+                new ConsoleMenuOption("Opción 3", HacerAlgo),
+                new ConsoleMenuOption("Salir", () => Environment.Exit(0)),
+            };
+
+            ConsoleMenu.CreateMenu(opcionesMenu);
+        }
+
+        private static void HacerAlgo()
+        {
+            Console.WriteLine("Adios");
+        }
+
+        private static void InicializarCooperativa()
+        {
             //Hacer depósito Inicial
             coop.Abonar(500);
-
-            ////Instancias de las clases con los parámetros
-            //ProdVegetal vegetal = new ProdVegetal("Café", 500, 4);
-            //Console.WriteLine(vegetal.Nombre);
-           
-
-            //ProdAnimal animal = new ProdAnimal("leche", 100, 1);
-            //Console.WriteLine(animal.Precio);
-
-
-            ////var granero = new CentroAcopio(1, 50, 30, 20, 1, 0);
-            ////Console.WriteLine(granero.Capacidad);
-
-            ////var granja = new Granja("Lecheria Familia Duran", TipoGranja.Lechería, TipoProducto.Leche, 3,3);
-            ////Console.WriteLine(granja.Nombre);
-            
-            //Console.WriteLine(coop.Dinero);
-            
-            //Console.ReadLine();
-        }  
+        }
     }
 }
-

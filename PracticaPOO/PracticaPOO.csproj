@@ -80,6 +80,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Clases\Semilla.cs" />
+    <Compile Include="UI\ConsoleMenu.cs" />
+    <Compile Include="UI\ConsoleMenuOption.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

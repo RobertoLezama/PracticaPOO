@@ -1,2 +1,3 @@
-PracticaPOO/obj/
-PracticaPOO/.vs/
+/PracticaPOO/obj
+/PracticaPOO/.vs
+/PracticaPOO/bin
