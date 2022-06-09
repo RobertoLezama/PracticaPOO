@@ -17,17 +17,13 @@ namespace PracticaPOO
             // Create options that you want your menu to have
             opcionesMenu = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("*   1 - Opción 1   *", () => Console.WriteLine("\r\tHola")),
+                new ConsoleMenuOption("*   1 - Opción 1 Opción 1 Opción 1 Opción 1 Opción 1   *", () => Console.WriteLine("\r\tHola")),
                 new ConsoleMenuOption("*   2 - Opción 2   *", () =>  Console.WriteLine("\r\tMundo")),
                 new ConsoleMenuOption("*   3 - Opción 3   *", HacerAlgo),
                 new ConsoleMenuOption("*   4 - Salir      *", () => Environment.Exit(0)),
-
             };
-
-            
-            Console.BackgroundColor = ConsoleColor.Black;
+                        
             ConsoleMenu.CreateMenu(opcionesMenu);
-
         }
 
 

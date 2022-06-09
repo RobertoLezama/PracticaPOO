@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clases\Box.cs" />
     <Compile Include="Clases\Cerdo.cs" />
     <Compile Include="Clases\Corral.cs" />
     <Compile Include="Clases\Gallinero.cs" />

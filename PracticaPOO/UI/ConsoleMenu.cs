@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PracticaPOO.UI
 {
@@ -8,6 +9,8 @@ namespace PracticaPOO.UI
 
         internal static void CreateMenu(List<ConsoleMenuOption> options)
         {
+            Console.BackgroundColor = ConsoleColor.Black;
+
             // Set the default index of the selected item to be the first
             int index = 0;
 
@@ -39,11 +42,11 @@ namespace PracticaPOO.UI
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
                 }
-               
+
                 switch (keyinfo.Key)
                 {
                     case ConsoleKey.D1:
-                        
+
                         options[0].Selected.Invoke();
                         index = 0;
                         break;
@@ -75,23 +78,31 @@ namespace PracticaPOO.UI
 
         internal static void WriteMenu(List<ConsoleMenuOption> options, ConsoleMenuOption selectedOption)
         {
-            Console.Clear();
+            int margen = 0; //options.Max(o => o.Name.Length);
 
+            for (int i = 0; i < options.Count; i++)
+            {
+                if (options[i].Name.Length > margen)
+                {
+                    margen = options[i].Name.Length;
+                }
+            }
+
+            Console.Clear();
             Console.SetCursorPosition((Console.WindowWidth - 12) / 2, Console.CursorTop);
 
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Console.WriteLine("");
             }
+
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.SetCursorPosition((Console.WindowWidth - 19) / 2, Console.CursorTop);
+            Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
             Console.WriteLine("********************");
-            Console.SetCursorPosition((Console.WindowWidth - 19) / 2, Console.CursorTop);
+            Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
             Console.WriteLine("*  Menu principal  *");
-            Console.SetCursorPosition((Console.WindowWidth - 19) / 2, Console.CursorTop);
+            Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
             Console.WriteLine("********************");
-
-
 
             foreach (ConsoleMenuOption option in options)
             {
@@ -110,11 +121,11 @@ namespace PracticaPOO.UI
 
                 }
 
-                Console.SetCursorPosition((Console.WindowWidth - 19) / 2, Console.CursorTop);
-                
+                Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
+
                 Console.WriteLine(option.Name);
             }
-            Console.SetCursorPosition((Console.WindowWidth - 19) / 2, Console.CursorTop);
+            Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
 
             Console.WriteLine("********************");
         }
