@@ -9,25 +9,30 @@ namespace PracticaPOO
         static Cooperativa coop = new Cooperativa();
         static List<ConsoleMenuOption> opcionesMenu;
 
-        static void Main()
+        static void Main(string[] args)
         {
+            
             InicializarCooperativa();
-
+            
             // Create options that you want your menu to have
             opcionesMenu = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("Opción 1", () => Console.WriteLine("Hola")),
-                new ConsoleMenuOption("Opción 2", () =>  Console.WriteLine("Mundo")),
-                new ConsoleMenuOption("Opción 3", HacerAlgo),
-                new ConsoleMenuOption("Salir", () => Environment.Exit(0)),
+                new ConsoleMenuOption("*   1 - Opción 1   *", () => Console.WriteLine("\r\tHola")),
+                new ConsoleMenuOption("*   2 - Opción 2   *", () =>  Console.WriteLine("\r\tMundo")),
+                new ConsoleMenuOption("*   3 - Opción 3   *", HacerAlgo),
+                new ConsoleMenuOption("*   4 - Salir      *", () => Environment.Exit(0)),
+
             };
 
+            
+            Console.BackgroundColor = ConsoleColor.Black;
             ConsoleMenu.CreateMenu(opcionesMenu);
         }
 
         private static void HacerAlgo()
         {
-            Console.WriteLine("Adios");
+            Console.WriteLine("\r\tAdios");
+            
         }
 
         private static void InicializarCooperativa()

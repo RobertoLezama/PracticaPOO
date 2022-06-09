@@ -4,3 +4,11 @@ C:\Users\rlezama\Desktop\PracticaPOO\obj\Debug\PracticaPOO.csproj.CoreCompileInp
 C:\Users\rlezama\Documents\Trabajo\Proyectos\Practica\PracticaPOO\PracticaPOO\obj\Debug\PracticaPOO.csproj.AssemblyReference.cache
 C:\Users\rlezama\Documents\Trabajo\Proyectos\Practica\PracticaPOO\PracticaPOO\obj\Debug\PracticaPOO.csproj.SuggestedBindingRedirects.cache
 C:\Users\rlezama\Documents\Trabajo\Proyectos\Practica\PracticaPOO\PracticaPOO\obj\Debug\PracticaPOO.csproj.CoreCompileInputs.cache
+C:\Users\lmonge\Documents\Clon\PracticaPOO\PracticaPOO\bin\Debug\PracticaPOO.exe.config
+C:\Users\lmonge\Documents\Clon\PracticaPOO\PracticaPOO\bin\Debug\PracticaPOO.exe
+C:\Users\lmonge\Documents\Clon\PracticaPOO\PracticaPOO\bin\Debug\PracticaPOO.pdb
+C:\Users\lmonge\Documents\Clon\PracticaPOO\PracticaPOO\obj\Debug\PracticaPOO.csproj.AssemblyReference.cache
+C:\Users\lmonge\Documents\Clon\PracticaPOO\PracticaPOO\obj\Debug\PracticaPOO.csproj.SuggestedBindingRedirects.cache
+C:\Users\lmonge\Documents\Clon\PracticaPOO\PracticaPOO\obj\Debug\PracticaPOO.csproj.CoreCompileInputs.cache
+C:\Users\lmonge\Documents\Clon\PracticaPOO\PracticaPOO\obj\Debug\PracticaPOO.exe
+C:\Users\lmonge\Documents\Clon\PracticaPOO\PracticaPOO\obj\Debug\PracticaPOO.pdb
