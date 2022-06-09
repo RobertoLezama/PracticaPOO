@@ -11,6 +11,7 @@ namespace PracticaPOO
 
         static void Main()
         {
+
             InicializarCooperativa();
 
             // Create options that you want your menu to have
@@ -23,7 +24,9 @@ namespace PracticaPOO
             };
 
             ConsoleMenu.CreateMenu(opcionesMenu);
+
         }
+
 
         private static void HacerAlgo()
         {

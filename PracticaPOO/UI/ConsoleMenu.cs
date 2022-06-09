@@ -5,6 +5,7 @@ namespace PracticaPOO.UI
 {
     internal class ConsoleMenu
     {
+
         internal static void CreateMenu(List<ConsoleMenuOption> options)
         {
             // Set the default index of the selected item to be the first
