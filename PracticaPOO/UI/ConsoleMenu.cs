@@ -6,6 +6,8 @@ namespace PracticaPOO.UI
 {
     internal class ConsoleMenu
     {
+        private static int margen;
+        private static bool f;
 
         internal static void CreateMenu(List<ConsoleMenuOption> options)
         {
@@ -78,15 +80,21 @@ namespace PracticaPOO.UI
 
         internal static void WriteMenu(List<ConsoleMenuOption> options, ConsoleMenuOption selectedOption)
         {
-            int margen = 0; //options.Max(o => o.Name.Length);
-
-            for (int i = 0; i < options.Count; i++)
+            if (!f)
             {
-                if (options[i].Name.Length > margen)
+                int lenght = options.Max(o => o.Name.Length);
+                var template = "*  {0," + lenght + "}  *";
+                margen = lenght + 6;
+
+                for (int i = 0; i < options.Count; i++)
                 {
-                    margen = options[i].Name.Length;
+                    options[i].Name = string.Format(template, options[i].Name);
+
                 }
+                f = true;
             }
+
+           
 
             Console.Clear();
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
@@ -98,11 +106,11 @@ namespace PracticaPOO.UI
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
-            Console.WriteLine("********************");
+            Console.WriteLine(new string('*',margen) );
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
             Console.WriteLine("*  Menu principal  *");
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
-            Console.WriteLine("********************");
+            Console.WriteLine(new string('*', margen));
 
             foreach (ConsoleMenuOption option in options)
             {
@@ -127,7 +135,7 @@ namespace PracticaPOO.UI
             }
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
 
-            Console.WriteLine("********************");
+            Console.WriteLine(new string('*', margen));
         }
     }
 }

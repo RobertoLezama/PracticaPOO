@@ -4,7 +4,7 @@ namespace PracticaPOO.UI
 {
     internal class ConsoleMenuOption
     {
-        public string Name { get; }
+        public string Name { get; set; }
 
         public Action Selected { get; }
 
@@ -13,5 +13,7 @@ namespace PracticaPOO.UI
             Name = name;
             Selected = selected;
         }
+
+        //public void SetName(string name);
     }
 }
