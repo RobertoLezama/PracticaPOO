@@ -89,9 +89,9 @@ namespace PracticaPOO.UI
             }
 
             Console.Clear();
-            Console.SetCursorPosition((Console.WindowWidth - 12) / 2, Console.CursorTop);
+            Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 7; i++)
             {
                 Console.WriteLine("");
             }
@@ -110,7 +110,7 @@ namespace PracticaPOO.UI
                 {
 
                     //Console.Write(">");
-                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    Console.BackgroundColor = ConsoleColor.Black;
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                 }
                 else
