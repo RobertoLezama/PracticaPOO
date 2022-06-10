@@ -11,16 +11,15 @@ namespace PracticaPOO.UI
 
         internal static void CreateMenu(List<ConsoleMenuOption> options)
         {
-            Console.BackgroundColor = ConsoleColor.Black;
-
             // Set the default index of the selected item to be the first
-            int index = 0;
+            int selectMenuIndex = 0;
 
             // Write the menu out
-            ConsoleMenu.WriteMenu(options, options[index]);
+            ConsoleMenu.WriteMenu(options, options[selectMenuIndex]);
 
             // Store key info in here
             ConsoleKeyInfo keyinfo;
+
             do
             {
                 keyinfo = Console.ReadKey();
@@ -28,54 +27,51 @@ namespace PracticaPOO.UI
                 // Handle each key input (down arrow will write the menu again with a different selected item)
                 if (keyinfo.Key == ConsoleKey.DownArrow)
                 {
-                    if (index + 1 < options.Count)
+                    if (selectMenuIndex + 1 < options.Count)
                     {
-                        index++;
-                        ConsoleMenu.WriteMenu(options, options[index]);
+                        selectMenuIndex++;
+                        ConsoleMenu.WriteMenu(options, options[selectMenuIndex]);
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
+                    else
+                        OpciónInválida(selectMenuIndex + 2);
                 }
                 if (keyinfo.Key == ConsoleKey.UpArrow)
                 {
-                    if (index - 1 >= 0)
+                    if (selectMenuIndex - 1 >= 0)
                     {
-                        index--;
-                        ConsoleMenu.WriteMenu(options, options[index]);
+                        selectMenuIndex--;
+                        ConsoleMenu.WriteMenu(options, options[selectMenuIndex]);
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
                 }
 
-                switch (keyinfo.Key)
+                if (keyinfo.KeyChar > '0' && keyinfo.KeyChar < '9')
                 {
-                    case ConsoleKey.D1:
+                    int dígito = int.Parse(keyinfo.KeyChar.ToString());
 
-                        options[0].Selected.Invoke();
-                        index = 0;
-                        break;
-                    case ConsoleKey.D2:
-                        options[1].Selected.Invoke();
-                        index = 0;
-                        break;
-                    case ConsoleKey.D3:
-                        options[2].Selected.Invoke();
-                        index = 0;
-                        break;
-                    case ConsoleKey.D4:
-                        options[3].Selected.Invoke();
-                        index = 0;
-                        break;
-                    default:
-                        break;
+                    if (dígito < options.Count)
+                    {
+                        options[dígito - 1].Selected.Invoke();
+                        selectMenuIndex = dígito;
+                    }
+                    else
+                        OpciónInválida(dígito);
                 }
 
                 // Handle different action for the option
                 if (keyinfo.Key == ConsoleKey.Enter)
                 {
-                    options[index].Selected.Invoke();
-                    index = 0;
+                    options[selectMenuIndex].Selected.Invoke();
+                    selectMenuIndex = 0;
                 }
             }
             while (keyinfo.Key != ConsoleKey.Escape && keyinfo.Key != ConsoleKey.X);
+        }
+
+        private static void OpciónInválida(int opción)
+        {
+            Console.Write($"La opción seleccionada ({opción}) no existe");
         }
 
         internal static void WriteMenu(List<ConsoleMenuOption> options, ConsoleMenuOption selectedOption)
@@ -94,8 +90,6 @@ namespace PracticaPOO.UI
                 f = true;
             }
 
-           
-
             Console.Clear();
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
 
@@ -106,7 +100,7 @@ namespace PracticaPOO.UI
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
-            Console.WriteLine(new string('*',margen) );
+            Console.WriteLine(new string('*', margen));
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
             Console.WriteLine("*  Menu principal  *");
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
