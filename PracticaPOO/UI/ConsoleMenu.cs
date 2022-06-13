@@ -11,19 +11,19 @@ namespace PracticaPOO.UI
 
         internal static void CreateMenu(List<ConsoleMenuOption> options, string Titulo = "")
         {
-            Titulo = Titulo.Equals("") ? "Menu Principal" : Titulo;
+            Titulo = string.IsNullOrEmpty(Titulo) ? "Menu Principal" : Titulo;
 
             // Set the default index of the selected item to be the first
             int selectMenuIndex = 0;
-
-            // Write the menu out
-            ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
 
             // Store key info in here
             ConsoleKeyInfo keyinfo;
 
             do
             {
+                // Write the menu out
+                ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
+
                 keyinfo = Console.ReadKey();
 
                 // Handle each key input (down arrow will write the menu again with a different selected item)
@@ -81,7 +81,7 @@ namespace PracticaPOO.UI
             if (!isFirstTime)
             {
                 int lenght = options.Max(o => o.Name.Length);
-                var template = "*  {0," + lenght + "}  *";
+                var template = "█  {0," + lenght + "}  █";
                 margen = lenght + 6;
 
                 for (int i = 0; i < options.Count; i++)
@@ -102,11 +102,11 @@ namespace PracticaPOO.UI
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
-            Console.WriteLine(new string('*', margen));
+            Console.WriteLine(new string('█', margen));
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
-            Console.WriteLine($"*      {Titulo}      *");
+            Console.WriteLine($"█      {Titulo}      █");
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
-            Console.WriteLine(new string('*', margen));
+            Console.WriteLine(new string('-', margen));
 
             foreach (ConsoleMenuOption option in options)
             {
@@ -131,7 +131,7 @@ namespace PracticaPOO.UI
             }
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
 
-            Console.WriteLine(new string('*', margen));
+            Console.WriteLine(new string('█', margen));
         }
     }
 }

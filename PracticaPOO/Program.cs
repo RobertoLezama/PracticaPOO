@@ -41,10 +41,10 @@ namespace PracticaPOO
             // Create options that you want your menu to have
             opcionesMenu = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Administrar Granja", () => AdministrarGranja ("Administrar")),
-                new ConsoleMenuOption("2 - Animales", () =>  SubMenu(Animales, opcionesMenu,"Animales")),
-                new ConsoleMenuOption("3 - Trabajadores", () => SubMenu(Trabajadores, opcionesMenu, "Trabajadores")),
-                new ConsoleMenuOption("4 - Productos", () => SubMenu(Productos, opcionesMenu, "Productos")),
+                new ConsoleMenuOption("1 - Administrar Granja", AdministrarGranja),
+                //new ConsoleMenuOption("2 - Animales", () =>  SubMenu(Animales, opcionesMenu,"Animales")),
+                //new ConsoleMenuOption("3 - Trabajadores", () => SubMenu(Trabajadores, opcionesMenu, "Trabajadores")),
+                //new ConsoleMenuOption("4 - Productos", () => SubMenu(Productos, opcionesMenu, "Productos")),
                 new ConsoleMenuOption("5 - Acerca De...", MostrarAcercaDe),
                 new ConsoleMenuOption("6 - Salir", () => Environment.Exit(0))
             };
@@ -52,57 +52,34 @@ namespace PracticaPOO
             ConsoleMenu.CreateMenu(opcionesMenu);
         }
 
-        private static void AdministrarGranja(string Titulo = "")
+        private static void AdministrarGranja()
         {
-            
-            List<ConsoleMenuOption> misOpciones = new List<ConsoleMenuOption>();
-
-            List<string> optMenu = new List<string>
+            var menuAdministrar = new List<ConsoleMenuOption>
             {
-                "Administración",
-                "Finanzas",
-                "Inventario",
-                
+                new ConsoleMenuOption("1 - Opcion 1", AdministrarOpcion1),
+                new ConsoleMenuOption("2 - Opción 2", () =>  MostrarMensaje("\r\tEsta es la opcion 2"))
             };
 
-            misOpciones = new List<ConsoleMenuOption>
+            ConsoleMenu.CreateMenu(menuAdministrar, "Administrar");
+        }
+
+        private static void MostrarMensaje(string mensaje)
+        {
+            Console.WriteLine(mensaje);
+            Console.WriteLine("> Presione cualquier tecla para continuar");
+            Console.ReadKey();
+        }
+
+        private static void AdministrarOpcion1()
+        {
+            var menuAdministrar = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Opcion 1",() => SubMenu(optMenu, misOpciones, "Departamentos")),
-                new ConsoleMenuOption("2 - Opción 2", () =>  Console.WriteLine("\r\tEsta es la opcion 2"))
+                new ConsoleMenuOption("1 - Opcion 1.1", () => MostrarMensaje("\r\tEsta es la opcion 1.1")),
+                new ConsoleMenuOption("2 - Opción 1.2", () => MostrarMensaje("\r\tEsta es la opcion 1.2"))
             };
 
-            ConsoleMenu.CreateMenu(misOpciones, Titulo);
-
-            ConsoleKeyInfo keyinfo;
-            keyinfo = Console.ReadKey();
-
-            if (keyinfo.Key == ConsoleKey.Escape || keyinfo.Key == ConsoleKey.X)
-            {
-                ConsoleMenu.CreateMenu(opcionesMenu);
-            }
+            ConsoleMenu.CreateMenu(menuAdministrar, "Administrar Sub Opción 1");
         }
-
-        private static void SubMenu(List<string> items,List<ConsoleMenuOption> MenuAnterior, string Titulo = "")
-        {
-            List<ConsoleMenuOption> subMenuOpt = new List<ConsoleMenuOption>();
-            int index = 1;
-            items.ForEach(opt =>
-            {
-                subMenuOpt.Add(new ConsoleMenuOption($"{index} {opt}", () => Console.WriteLine($"\r\tNombre: {opt}")));
-                index++;
-            });
-
-            ConsoleMenu.CreateMenu(subMenuOpt, Titulo);
-
-            ConsoleKeyInfo keyinfo;
-            keyinfo = Console.ReadKey();
-
-            if (keyinfo.Key == ConsoleKey.Escape || keyinfo.Key == ConsoleKey.X)
-            {
-                ConsoleMenu.CreateMenu(MenuAnterior);
-            }
-        }
-
 
         private static void MostrarAcercaDe()
         {
