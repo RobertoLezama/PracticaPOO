@@ -7,7 +7,7 @@ namespace PracticaPOO.UI
     internal class ConsoleMenu
     {
         private static int margen;
-        private static bool f;
+        private static bool isFirstTime;
 
         internal static void CreateMenu(List<ConsoleMenuOption> options)
         {
@@ -50,7 +50,7 @@ namespace PracticaPOO.UI
                 {
                     int dígito = int.Parse(keyinfo.KeyChar.ToString());
 
-                    if (dígito < options.Count)
+                    if (dígito <= options.Count)
                     {
                         options[dígito - 1].Selected.Invoke();
                         selectMenuIndex = dígito;
@@ -76,7 +76,7 @@ namespace PracticaPOO.UI
 
         internal static void WriteMenu(List<ConsoleMenuOption> options, ConsoleMenuOption selectedOption)
         {
-            if (!f)
+            if (!isFirstTime)
             {
                 int lenght = options.Max(o => o.Name.Length);
                 var template = "*  {0," + lenght + "}  *";
@@ -84,10 +84,10 @@ namespace PracticaPOO.UI
 
                 for (int i = 0; i < options.Count; i++)
                 {
+                    options[i].Name = options[i].Name.PadRight(lenght, ' ');
                     options[i].Name = string.Format(template, options[i].Name);
-
                 }
-                f = true;
+                isFirstTime = true;
             }
 
             Console.Clear();
@@ -102,7 +102,7 @@ namespace PracticaPOO.UI
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
             Console.WriteLine(new string('*', margen));
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
-            Console.WriteLine("*  Menu principal  *");
+            Console.WriteLine("*      Menu principal      *");
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
             Console.WriteLine(new string('*', margen));
 
