@@ -11,6 +11,7 @@ namespace PracticaPOO
 
         static void Main(string[] args)
         {
+
             //Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             InicializarCooperativa();
 
@@ -21,7 +22,7 @@ namespace PracticaPOO
                 "Gallinas"
             };
 
-            List<string> trabajadores = new List<string>
+            List<string> Trabajadores = new List<string>
             {
                 "Heiner",
                 "Roberto",
@@ -40,36 +41,37 @@ namespace PracticaPOO
             // Create options that you want your menu to have
             opcionesMenu = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Administrar Granja", AdministrarGranja),
-                new ConsoleMenuOption("2 - Animales", () =>  SubMenu(Animales, opcionesMenu)),
-                new ConsoleMenuOption("3 - Acerca De...", MostrarAcercaDe),
-                new ConsoleMenuOption("4 - Trabajadores", () => SubMenu(trabajadores, opcionesMenu)),
-                new ConsoleMenuOption("5 - Productos", () => SubMenu(Productos, opcionesMenu)),
-                new ConsoleMenuOption("6 -Salir", () => Environment.Exit(0))
+                new ConsoleMenuOption("1 - Administrar Granja", () => AdministrarGranja ("Administrar")),
+                new ConsoleMenuOption("2 - Animales", () =>  SubMenu(Animales, opcionesMenu,"Animales")),
+                new ConsoleMenuOption("3 - Trabajadores", () => SubMenu(Trabajadores, opcionesMenu, "Trabajadores")),
+                new ConsoleMenuOption("4 - Productos", () => SubMenu(Productos, opcionesMenu, "Productos")),
+                new ConsoleMenuOption("5 - Acerca De...", MostrarAcercaDe),
+                new ConsoleMenuOption("6 - Salir", () => Environment.Exit(0))
             };
 
             ConsoleMenu.CreateMenu(opcionesMenu);
         }
 
-        private static void AdministrarGranja()
+        private static void AdministrarGranja(string Titulo = "")
         {
+            
             List<ConsoleMenuOption> misOpciones = new List<ConsoleMenuOption>();
 
             List<string> optMenu = new List<string>
             {
-                "Opt sub menu1",
-                "Opt sub menu2",
-                "Opt sub menu3",
+                "Administración",
+                "Finanzas",
+                "Inventario",
                 
             };
 
             misOpciones = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Opcion 1",() => SubMenu(optMenu, misOpciones)),
+                new ConsoleMenuOption("1 - Opcion 1",() => SubMenu(optMenu, misOpciones, "Departamentos")),
                 new ConsoleMenuOption("2 - Opción 2", () =>  Console.WriteLine("\r\tEsta es la opcion 2"))
             };
 
-            ConsoleMenu.CreateMenu(misOpciones);
+            ConsoleMenu.CreateMenu(misOpciones, Titulo);
 
             ConsoleKeyInfo keyinfo;
             keyinfo = Console.ReadKey();
@@ -80,7 +82,7 @@ namespace PracticaPOO
             }
         }
 
-        private static void SubMenu(List<string> items,List<ConsoleMenuOption> MenuAnterior)
+        private static void SubMenu(List<string> items,List<ConsoleMenuOption> MenuAnterior, string Titulo = "")
         {
             List<ConsoleMenuOption> subMenuOpt = new List<ConsoleMenuOption>();
             int index = 1;
@@ -89,7 +91,8 @@ namespace PracticaPOO
                 subMenuOpt.Add(new ConsoleMenuOption($"{index} {opt}", () => Console.WriteLine($"\r\tNombre: {opt}")));
                 index++;
             });
-            ConsoleMenu.CreateMenu(subMenuOpt);
+
+            ConsoleMenu.CreateMenu(subMenuOpt, Titulo);
 
             ConsoleKeyInfo keyinfo;
             keyinfo = Console.ReadKey();

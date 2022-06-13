@@ -9,13 +9,15 @@ namespace PracticaPOO.UI
         private static int margen;
         private static bool isFirstTime;
 
-        internal static void CreateMenu(List<ConsoleMenuOption> options)
+        internal static void CreateMenu(List<ConsoleMenuOption> options, string Titulo = "")
         {
+            Titulo = Titulo.Equals("") ? "Menu Principal" : Titulo;
+
             // Set the default index of the selected item to be the first
             int selectMenuIndex = 0;
 
             // Write the menu out
-            ConsoleMenu.WriteMenu(options, options[selectMenuIndex]);
+            ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
 
             // Store key info in here
             ConsoleKeyInfo keyinfo;
@@ -30,7 +32,7 @@ namespace PracticaPOO.UI
                     if (selectMenuIndex + 1 < options.Count)
                     {
                         selectMenuIndex++;
-                        ConsoleMenu.WriteMenu(options, options[selectMenuIndex]);
+                        ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
                     else
@@ -41,12 +43,12 @@ namespace PracticaPOO.UI
                     if (selectMenuIndex - 1 >= 0)
                     {
                         selectMenuIndex--;
-                        ConsoleMenu.WriteMenu(options, options[selectMenuIndex]);
+                        ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
                 }
 
-                if (keyinfo.KeyChar > '0' && keyinfo.KeyChar < '9')
+                if (keyinfo.KeyChar > '0' && keyinfo.KeyChar <= '9')
                 {
                     int dígito = int.Parse(keyinfo.KeyChar.ToString());
 
@@ -71,10 +73,10 @@ namespace PracticaPOO.UI
 
         private static void OpciónInválida(int opción)
         {
-            Console.Write($"La opción seleccionada ({opción}) no existe");
+            Console.Write($"\r\tLa opción ({opción}) no existe\r");
         }
 
-        internal static void WriteMenu(List<ConsoleMenuOption> options, ConsoleMenuOption selectedOption)
+        internal static void WriteMenu(List<ConsoleMenuOption> options, ConsoleMenuOption selectedOption, string Titulo)
         {
             if (!isFirstTime)
             {
@@ -102,7 +104,7 @@ namespace PracticaPOO.UI
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
             Console.WriteLine(new string('*', margen));
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
-            Console.WriteLine("*      Menu principal      *");
+            Console.WriteLine($"*      {Titulo}      *");
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
             Console.WriteLine(new string('*', margen));
 
