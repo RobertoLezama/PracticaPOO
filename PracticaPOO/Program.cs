@@ -15,28 +15,6 @@ namespace PracticaPOO
             //Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             InicializarCooperativa();
 
-            List<string> Animales = new List<string>
-            {
-                "Vacas",
-                "Cerdos",
-                "Gallinas"
-            };
-
-            List<string> Trabajadores = new List<string>
-            {
-                "Heiner",
-                "Roberto",
-                "Leidy"
-            };
-
-            List<string> Productos = new List<string>
-            {
-                "Leche",
-                "Huevos",
-                "Carne",
-                "Vegetales"
-            };
-
 
             // Create options that you want your menu to have
             opcionesMenu = new List<ConsoleMenuOption>
