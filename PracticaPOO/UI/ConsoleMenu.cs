@@ -8,10 +8,14 @@ namespace PracticaPOO.UI
     {
         private static int margen;
         private static bool isFirstTime;
+        private static bool subMenu;
+        private static string template;
+        private static int lenght;
 
-        internal static void CreateMenu(List<ConsoleMenuOption> options, string Titulo = "")
+        internal static void CreateMenu(List<ConsoleMenuOption> options, string Titulo = "", bool isSubmenu = false)
         {
             Titulo = string.IsNullOrEmpty(Titulo) ? "Menu Principal" : Titulo;
+            subMenu = isFirstTime && isSubmenu ? true : false;
 
             // Set the default index of the selected item to be the first
             int selectMenuIndex = 0;
@@ -33,7 +37,7 @@ namespace PracticaPOO.UI
                     {
                         selectMenuIndex++;
                         ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
-                        Console.BackgroundColor = ConsoleColor.Black;
+                        //Console.BackgroundColor = ConsoleColor.Black;
                     }
                     else
                         OpciónInválida(selectMenuIndex + 2);
@@ -44,7 +48,7 @@ namespace PracticaPOO.UI
                     {
                         selectMenuIndex--;
                         ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
-                        Console.BackgroundColor = ConsoleColor.Black;
+                        //Console.BackgroundColor = ConsoleColor.Black;
                     }
                 }
 
@@ -67,8 +71,16 @@ namespace PracticaPOO.UI
                     options[selectMenuIndex].Selected.Invoke();
                     selectMenuIndex = 0;
                 }
+
+                if ((keyinfo.Key != ConsoleKey.Escape || keyinfo.Key != ConsoleKey.X) && isFirstTime)
+                {
+                    isFirstTime = false;
+                    subMenu = true;
+                };
             }
             while (keyinfo.Key != ConsoleKey.Escape && keyinfo.Key != ConsoleKey.X);
+
+            
         }
 
         private static void OpciónInválida(int opción)
@@ -78,22 +90,31 @@ namespace PracticaPOO.UI
 
         internal static void WriteMenu(List<ConsoleMenuOption> options, ConsoleMenuOption selectedOption, string Titulo)
         {
-            if (!isFirstTime)
+            foreach (ConsoleMenuOption option in options)
             {
-                int lenght = options.Max(o => o.Name.Length);
-                var template = "█  {0," + lenght + "}  █";
-                margen = lenght + 6;
+                if (option.Name.Contains('║'))
+                {
+                    option.Name = option.Name.Replace('║', ' ').Trim();
+                } 
+            }
 
+            lenght = options.Max(o => o.Name.Length);
+            lenght = lenght > Titulo.Length ? lenght : Titulo.Length;
+            template = "║  {0," + lenght + "}  ║";
+            margen = lenght + 6;
+
+            if (!isFirstTime || subMenu)
+            {
                 for (int i = 0; i < options.Count; i++)
                 {
                     options[i].Name = options[i].Name.PadRight(lenght, ' ');
                     options[i].Name = string.Format(template, options[i].Name);
                 }
                 isFirstTime = true;
+                subMenu = false;
             }
 
             Console.Clear();
-            Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
 
             for (int i = 0; i < 7; i++)
             {
@@ -102,20 +123,23 @@ namespace PracticaPOO.UI
 
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
-            Console.WriteLine(new string('█', margen));
+            string esquinaSuper = new string('═', margen).Substring(0, 1).Replace('═', '╔') + new string('═', margen).Substring(1, margen - 2) + new string('═', margen).Substring(margen - 1).Replace('═', '╗');
+            Console.WriteLine(esquinaSuper);
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
-            Console.WriteLine($"█      {Titulo}      █");
+            Titulo = Titulo.PadRight(lenght, ' ').PadLeft(lenght, ' ');
+            Console.WriteLine(string.Format(template,Titulo));
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
-            Console.WriteLine(new string('-', margen));
+            string esquinaMedio = new string('═', margen).Substring(0, 1).Replace('═', '╠') + new string('═', margen).Substring(1, margen - 2) + new string('═', margen).Substring(margen - 1).Replace('═', '╣');
+            Console.WriteLine(esquinaMedio);
 
             foreach (ConsoleMenuOption option in options)
             {
                 if (option == selectedOption)
                 {
-
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     //Console.Write(">");
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                   
+
                 }
                 else
                 {
@@ -131,7 +155,9 @@ namespace PracticaPOO.UI
             }
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
 
-            Console.WriteLine(new string('█', margen));
+            string esquina = new string('═', margen).Substring(0,1).Replace('═', '╚') + new string('═', margen).Substring(1, margen - 2) + new string('═', margen).Substring(margen - 1).Replace('═', '╝');
+            Console.WriteLine(esquina);
+
         }
     }
 }

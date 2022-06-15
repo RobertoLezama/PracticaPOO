@@ -60,7 +60,7 @@ namespace PracticaPOO
                 new ConsoleMenuOption("2 - Opción 2", () =>  MostrarMensaje("\r\tEsta es la opcion 2"))
             };
 
-            ConsoleMenu.CreateMenu(menuAdministrar, "Administrar");
+            ConsoleMenu.CreateMenu(menuAdministrar, "Administrar", true);
         }
 
         private static void MostrarMensaje(string mensaje)
@@ -78,7 +78,7 @@ namespace PracticaPOO
                 new ConsoleMenuOption("2 - Opción 1.2", () => MostrarMensaje("\r\tEsta es la opcion 1.2"))
             };
 
-            ConsoleMenu.CreateMenu(menuAdministrar, "Administrar Sub Opción 1");
+            ConsoleMenu.CreateMenu(menuAdministrar, "Administrar Sub Opción 1", true);
         }
 
         private static void MostrarAcercaDe()
