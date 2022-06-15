@@ -15,6 +15,7 @@ namespace PracticaPOO.UI
         internal static void CreateMenu(List<ConsoleMenuOption> options, string Titulo = "", bool isSubmenu = false)
         {
             Titulo = string.IsNullOrEmpty(Titulo) ? "Menu Principal" : Titulo;
+            //Esto se crea para que cuando entramos a un submenu se alinie y se le dibujen los caracteres del marco dinámicamente
             subMenu = isFirstTime && isSubmenu ? true : false;
 
             // Set the default index of the selected item to be the first
@@ -62,7 +63,10 @@ namespace PracticaPOO.UI
                         selectMenuIndex = 0;
                     }
                     else
+                    {
                         OpciónInválida(dígito);
+                    }
+                        
                 }
 
                 // Handle different action for the option
@@ -71,8 +75,8 @@ namespace PracticaPOO.UI
                     options[selectMenuIndex].Selected.Invoke();
                     selectMenuIndex = 0;
                 }
-
-                if ((keyinfo.Key != ConsoleKey.Escape || keyinfo.Key != ConsoleKey.X) && isFirstTime)
+                //Esta validación es para cuando salimos con ESC o X se le dibuje de nuevo el marco y quede alineado
+                if (isFirstTime)
                 {
                     isFirstTime = false;
                     subMenu = true;
@@ -85,12 +89,16 @@ namespace PracticaPOO.UI
 
         private static void OpciónInválida(int opción)
         {
-            Console.Write($"\r\tLa opción ({opción}) no existe\r");
+            Console.WriteLine($"\r\tLa opción ({opción}) no existe");
+            //Añadimos estas lineas porque fue la forma en la que se logró imprimir la opción invalida, sin estas no se imprime.
+            Console.WriteLine("> Presione cualquier tecla para continuar");
+            Console.ReadKey();
         }
 
         internal static void WriteMenu(List<ConsoleMenuOption> options, ConsoleMenuOption selectedOption, string Titulo)
         {
-            foreach (ConsoleMenuOption option in options)//Se retiran los caracteres especiales y con el trim se le quietan los espacios para que se vuelvan a crear.
+            foreach (ConsoleMenuOption option in options)
+            //Se retiran los caracteres especiales y con el trim se le quietan los espacios para que se vuelvan a crear.
             {
                 if (option.Name.Contains('║'))
                 {
