@@ -35,5 +35,25 @@ namespace PracticaPOO
             else
                 throw new Exception("No hay saldo para retirar ese monto");
         }
+
+        public void SimularExistenciasDeProductos()
+        {
+            bodegas.GuardarProducto(new Leche());
+            bodegas.GuardarProducto(new Leche());
+
+            bodegas.GuardarProducto(new Huevos());
+            bodegas.GuardarProducto(new Huevos());
+            bodegas.GuardarProducto(new Huevos());
+
+            bodegas.GuardarProducto(new Fruta { Tipo= Enums.Fruta.Fresa });
+            bodegas.GuardarProducto(new Fruta { Tipo = Enums.Fruta.Fresa });
+            bodegas.GuardarProducto(new Fruta { Tipo = Enums.Fruta.Mora });
+            bodegas.GuardarProducto(new Fruta { Tipo = Enums.Fruta.Piña });
+        }
+
+        public void ImprimirInventario()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

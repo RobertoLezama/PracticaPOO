@@ -66,7 +66,6 @@ namespace PracticaPOO.UI
                     {
                         OpciónInválida(dígito);
                     }
-                        
                 }
 
                 // Handle different action for the option
@@ -98,6 +97,7 @@ namespace PracticaPOO.UI
         internal static void WriteMenu(List<ConsoleMenuOption> options, ConsoleMenuOption selectedOption, string Titulo)
         {
             foreach (ConsoleMenuOption option in options)
+
             //Se retiran los caracteres especiales y con el trim se le quietan los espacios para que se vuelvan a crear.
             {
                 if (option.Name.Contains('║'))
@@ -145,15 +145,11 @@ namespace PracticaPOO.UI
                 if (option == selectedOption)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    //Console.Write(">");
-                   
-
                 }
                 else
                 {
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.ForegroundColor = ConsoleColor.Green;
-                    //Console.Write(" ");
 
                 }
 

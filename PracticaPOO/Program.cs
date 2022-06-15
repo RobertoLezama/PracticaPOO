@@ -23,8 +23,9 @@ namespace PracticaPOO
                 new ConsoleMenuOption("2 - Animales", AnimalesSubMenu),
                 //new ConsoleMenuOption("3 - Trabajadores", TrabSubMenu),
                 //new ConsoleMenuOption("4 - Productos", ProdSubMenu),
-                new ConsoleMenuOption("5 - Acerca De...", MostrarAcercaDe),
-                new ConsoleMenuOption("6 - Salir", () => Environment.Exit(0))
+                new ConsoleMenuOption("3 - Inventario", RptInventario),
+                new ConsoleMenuOption("4 - Acerca De...", MostrarAcercaDe),
+                new ConsoleMenuOption("5 - Salir", () => Environment.Exit(0))
             };
 
             ConsoleMenu.CreateMenu(opcionesMenu);
@@ -38,7 +39,7 @@ namespace PracticaPOO
                 new ConsoleMenuOption("2 - Opción 2", () =>  MostrarMensaje("\r\tEsta es la opcion 2"))
             };
 
-            ConsoleMenu.CreateMenu(menuAdministrar, "Administrar", true);
+            ConsoleMenu.CreateMenu(menuAdministrar, "Administrar las opicones del menú", true);
         }
 
         private static void AnimalesSubMenu()
@@ -50,6 +51,11 @@ namespace PracticaPOO
                 new ConsoleMenuOption("3 - Cerdos", AccionesCerdos),
             };
             ConsoleMenu.CreateMenu(menuAnimales, "Animales", true);
+        }
+
+        private static void RptInventario()
+        {
+            coop.ImprimirInventario();
         }
 
         //private static void TrabSubMenu()
@@ -145,7 +151,7 @@ namespace PracticaPOO
 
             if (keyinfo.Key == ConsoleKey.Escape || keyinfo.Key == ConsoleKey.X)
             {
-                ConsoleMenu.CreateMenu(opcionesMenu,"", true);
+                ConsoleMenu.CreateMenu(opcionesMenu, "", true);
             }
         }
 
@@ -153,6 +159,8 @@ namespace PracticaPOO
         {
             //Hacer depósito Inicial
             coop.Abonar(500);
+
+            coop.SimularExistenciasDeProductos();
         }
     }
 }

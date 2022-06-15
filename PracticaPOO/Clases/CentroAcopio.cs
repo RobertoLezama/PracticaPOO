@@ -12,11 +12,6 @@ namespace PracticaPOO
         
         public int Capacidad { get; private set; }
 
-        /*
-        public int CantProdVegetal => productos.Count(p => p is ProdVegetal);
-        public int CantProdAnimal { get; set; }
-        */
-
         public int TotalProductos => productos.Count;
 
         public int TotalBodegasVacias => Capacidad - productos.Count;
