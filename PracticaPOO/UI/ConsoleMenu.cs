@@ -26,7 +26,7 @@ namespace PracticaPOO.UI
             do
             {
                 // Write the menu out
-                ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
+               ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
 
                 keyinfo = Console.ReadKey();
 
@@ -59,7 +59,7 @@ namespace PracticaPOO.UI
                     if (dígito <= options.Count)
                     {
                         options[dígito - 1].Selected.Invoke();
-                        selectMenuIndex = dígito;
+                        selectMenuIndex = 0;
                     }
                     else
                         OpciónInválida(dígito);
@@ -90,7 +90,7 @@ namespace PracticaPOO.UI
 
         internal static void WriteMenu(List<ConsoleMenuOption> options, ConsoleMenuOption selectedOption, string Titulo)
         {
-            foreach (ConsoleMenuOption option in options)
+            foreach (ConsoleMenuOption option in options)//Se retiran los caracteres especiales y con el trim se le quietan los espacios para que se vuelvan a crear.
             {
                 if (option.Name.Contains('║'))
                 {
@@ -136,7 +136,7 @@ namespace PracticaPOO.UI
             {
                 if (option == selectedOption)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     //Console.Write(">");
                    
 
@@ -156,6 +156,7 @@ namespace PracticaPOO.UI
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
 
             string esquina = new string('═', margen).Substring(0,1).Replace('═', '╚') + new string('═', margen).Substring(1, margen - 2) + new string('═', margen).Substring(margen - 1).Replace('═', '╝');
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(esquina);
 
         }

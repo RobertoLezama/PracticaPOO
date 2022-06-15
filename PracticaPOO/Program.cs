@@ -42,7 +42,7 @@ namespace PracticaPOO
             opcionesMenu = new List<ConsoleMenuOption>
             {
                 new ConsoleMenuOption("1 - Administrar Granja", AdministrarGranja),
-                //new ConsoleMenuOption("2 - Animales", () =>  SubMenu(Animales, opcionesMenu,"Animales")),
+                new ConsoleMenuOption("2 - Animales", Submenu),
                 //new ConsoleMenuOption("3 - Trabajadores", () => SubMenu(Trabajadores, opcionesMenu, "Trabajadores")),
                 //new ConsoleMenuOption("4 - Productos", () => SubMenu(Productos, opcionesMenu, "Productos")),
                 new ConsoleMenuOption("5 - Acerca De...", MostrarAcercaDe),
@@ -63,6 +63,16 @@ namespace PracticaPOO
             ConsoleMenu.CreateMenu(menuAdministrar, "Administrar", true);
         }
 
+        private static void Submenu()
+        {
+            var menuAnimales = new List<ConsoleMenuOption>
+            {
+                new ConsoleMenuOption("1 - Opcion 1", AdministrarOpcion1),
+                new ConsoleMenuOption("2 - Opción 2", () =>  MostrarMensaje("\r\tEsta es la opcion 2"))
+            };
+
+            ConsoleMenu.CreateMenu(menuAnimales, "Animales", true);
+        }
         private static void MostrarMensaje(string mensaje)
         {
             Console.WriteLine(mensaje);
@@ -103,7 +113,7 @@ namespace PracticaPOO
 
             if (keyinfo.Key == ConsoleKey.Escape || keyinfo.Key == ConsoleKey.X)
             {
-                ConsoleMenu.CreateMenu(opcionesMenu);
+                ConsoleMenu.CreateMenu(opcionesMenu,"", true);
             }
         }
 
