@@ -18,5 +18,10 @@ namespace PracticaPOO
 			Nombre = nombre;
 			Precio = precio;
 		}
-	}
+
+        public override string ToString()
+        {
+			return this.Nombre;
+        }
+    }
 }

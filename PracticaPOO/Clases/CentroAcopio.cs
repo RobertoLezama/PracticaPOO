@@ -38,6 +38,20 @@ namespace PracticaPOO
             return true;
         }
 
+        public void ImprimirReporte()
+        {
+            var productosPorTipo = productos.GroupBy(p => p.ToString());
+
+            foreach (var prod in productosPorTipo)
+            {
+                Console.WriteLine( $"Nombre: {prod.Key}. Cantidad: {prod.Count()}" );
+            }
+
+            //Imprimir Existencias / Capacidad
+
+            Console.ReadLine();
+        }
+
         public Producto Retirar(Type tipoDeProducto)
         {
             foreach (var prod in productos)

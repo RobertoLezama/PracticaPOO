@@ -53,7 +53,7 @@ namespace PracticaPOO
 
         public void ImprimirInventario()
         {
-            throw new NotImplementedException();
+            bodegas.ImprimirReporte();
         }
     }
 }

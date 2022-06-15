@@ -14,17 +14,10 @@
       <FileName>Clases\Camión.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PracticaPOO.CentroAcopio">
-    <Position X="21.25" Y="0.5" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAhEAAAAAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
-      <FileName>Clases\CentroAcopio.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="PracticaPOO.Cooperativa">
     <Position X="24.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAABQCAAAA=</HashCode>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAABAAAAAAIAAAAAABQCAACA=</HashCode>
       <FileName>Clases\Cooperativa.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -171,6 +164,13 @@
       <FileName>Clases\Porqueriza.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PracticaPOO.CentroAcopio">
+    <Position X="21.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAhEAAAAAABIAAAAAAAIAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Clases\CentroAcopio.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Interface Name="PracticaPOO.IProductor" Collapsed="true">
     <Position X="25" Y="3" Width="1.5" />

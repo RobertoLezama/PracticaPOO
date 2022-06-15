@@ -78,7 +78,7 @@ namespace PracticaPOO
         //    ConsoleMenu.CreateMenu(menuProductos, "Productos", true);
         //}
 
-        private static void MostrarMensaje(string mensaje)
+        public static void MostrarMensaje(string mensaje)
         {
             Console.WriteLine(mensaje);
             Console.WriteLine("> Presione cualquier tecla para continuar");

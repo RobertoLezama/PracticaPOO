@@ -10,5 +10,10 @@
 		{
 			this.Tipo = tipo;
 		}
+
+		public override string ToString()
+		{
+			return this.Tipo.ToString();
+		}
 	}
 }
