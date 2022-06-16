@@ -41,15 +41,22 @@ namespace PracticaPOO
         {
             Console.Clear();
 
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine("");
+            }
+
             var productosPorTipo = productos
                                   .GroupBy(p => p.ToString())
-                                  .Select(g => new { Nombre = g.Key, Cantidad = g.Count() });
+                                  .Select(g => new { Nombre = g.Key, Cantidad = g.Count() })
+                                  .OrderByDescending(p => p.Cantidad);
 
             int tamProdMax = productosPorTipo.Max(p => p.Nombre.Length);
             int tamCantMax = productosPorTipo.Max(c => c.Cantidad.ToString().Length);
             tamProdMax = tamProdMax > 8 ? tamProdMax : 8;
             tamCantMax = tamCantMax > 8 ? tamCantMax : 8;
 
+            //Console.SetCursorPosition((Console.WindowWidth - tamProdMax) / 2, Console.CursorTop);
             string template = "\r│  {0," + tamProdMax + "}   │  {1," + tamCantMax + "}   │";
             
             string esquinaSuper = "\r" +new string('─', tamProdMax + 21).Substring(0, 1).Replace('─', '┌') + 
@@ -58,8 +65,9 @@ namespace PracticaPOO
                 + new string('─', tamProdMax + 21).Substring(tamProdMax + 6, tamCantMax + 5)
                 + new string('─', tamProdMax + 21).Substring(tamProdMax + 20).Replace('─', '┐');
             Console.WriteLine(esquinaSuper);
-
+          
             Console.WriteLine(string.Format(template, "Producto".PadRight(tamProdMax, ' '), "Cantidad".PadRight(tamCantMax, ' ')));
+            //Console.SetCursorPosition((Console.WindowWidth - tamProdMax) / 2, Console.CursorTop);
             string esquinaMedio = new string('─', tamProdMax + 21).Substring(0, 1).Replace('─', '├') 
                 + new string('─', tamProdMax + 21).Substring(1, tamProdMax + 5)
                 + new string('─', tamProdMax + 21).Substring(tamProdMax + 6, 1).Replace('─', '┼')
@@ -72,7 +80,7 @@ namespace PracticaPOO
                 Console.WriteLine(string.Format(template, prod.Nombre.PadRight(tamProdMax, ' '), prod.Cantidad));
                
             }
-
+            //Console.SetCursorPosition((Console.WindowWidth - tamProdMax) / 2, Console.CursorTop);
             string esquina = new string('─', tamProdMax + 21).Substring(0, 1).Replace('─', '└')
                 + new string('─', tamProdMax + 21).Substring(1, tamProdMax + 5)
                 + new string('─', tamProdMax + 21).Substring(tamProdMax + 6, 1).Replace('─', '┴')
@@ -87,31 +95,31 @@ namespace PracticaPOO
             {
                 cant = cant + prod.Cantidad;
             }
-            
-            string cuadro = "│  {0," + 11 + "}   │  {1," + 9 + "}   │";
-            string esquinaCua =  new string('─', 33).Substring(0, 1).Replace('─', '┌') +
-                new string('─',  33).Substring(1, 16)
-                + new string('─', 33).Substring(17, 1).Replace('─', '┬')
-                + new string('─', 33).Substring(17, 14)
-                + new string('─', 33).Substring(32).Replace('─', '┐');
-            Console.WriteLine(esquinaCua);
-            Console.WriteLine(string.Format(cuadro, "Existencias", "Cantidad"));
 
-            string esquinaMed = new string('─', 33).Substring(0, 1).Replace('─', '├')
-               + new string('─', 33).Substring(1, 16)
-               + new string('─', 33).Substring(17 , 1).Replace('─', '┼')
-               + new string('─', 33).Substring(17, 14)
+            string cuadro = "│  {0," + 9 + "}   │  {1," + 11 + "}   │";
+            string esquinaSuperiorCuadro =  new string('─', 33).Substring(0, 1).Replace('─', '┌') +
+                new string('─',  33).Substring(1, 14)
+                + new string('─', 33).Substring(15, 1).Replace('─', '┬')
+                + new string('─', 33).Substring(16, 16)
+                + new string('─', 33).Substring(32).Replace('─', '┐');
+            Console.WriteLine(esquinaSuperiorCuadro);
+            Console.WriteLine(string.Format(cuadro, "Capacidad", "Existencias"));
+
+            string esquinaCuadroMedio = new string('─', 33).Substring(0, 1).Replace('─', '├')
+               + new string('─', 33).Substring(1, 14)
+               + new string('─', 33).Substring(15 , 1).Replace('─', '┼')
+               + new string('─', 33).Substring(16, 16)
                + new string('─', 33).Substring(32).Replace('─', '┤');
-            Console.WriteLine(esquinaMed);
+            Console.WriteLine(esquinaCuadroMedio);
 
             
             Console.WriteLine(string.Format(cuadro, Capacidad, cant));
-            string esquinaAb = new string('─', 33).Substring(0, 1).Replace('─', '└')
-                + new string('─',33).Substring(1, 16)
-                + new string('─', 33).Substring(17, 1).Replace('─', '┴')
-                + new string('─', 33).Substring(17, 14)
+            string esquinaInferiorCuadro = new string('─', 33).Substring(0, 1).Replace('─', '└')
+                + new string('─',33).Substring(1, 14)
+                + new string('─', 33).Substring(15, 1).Replace('─', '┴')
+                + new string('─', 33).Substring(16, 16)
                 + new string('─', 33).Substring(32).Replace('─', '┘');
-            Console.WriteLine(esquinaAb);
+            Console.WriteLine(esquinaInferiorCuadro);
 
            
             Console.WriteLine("Presione cualquier tecla para continuar . . .");
