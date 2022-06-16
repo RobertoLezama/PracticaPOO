@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PracticaPOO
 {
     public class CentroAcopio
     {
         List<Producto> productos;
-        
+
         public int Capacidad { get; private set; }
 
         public int TotalProductos => productos.Count;
@@ -40,16 +38,23 @@ namespace PracticaPOO
 
         public void ImprimirReporte()
         {
-            var productosPorTipo = productos.GroupBy(p => p.ToString());
+            Console.Clear();
+
+            var productosPorTipo = productos
+                                  .GroupBy(p => p.ToString())
+                                  .Select(g => new { Nombre = g.Key, Cantidad = g.Count() });
 
             foreach (var prod in productosPorTipo)
             {
-                Console.WriteLine( $"Nombre: {prod.Key}. Cantidad: {prod.Count()}" );
+                Console.WriteLine($"Nombre: {prod.Nombre}. Cantidad: {prod.Cantidad}");
             }
 
             //Imprimir Existencias / Capacidad
 
-            Console.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine("Presione cualquier tecla para continuar . . .");
+
+            Console.ReadKey(true);
         }
 
         public Producto Retirar(Type tipoDeProducto)
