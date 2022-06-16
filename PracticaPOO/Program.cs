@@ -1,4 +1,5 @@
-﻿using PracticaPOO.UI;
+﻿using PracticaPOO.Clases;
+using PracticaPOO.UI;
 using System;
 using System.Collections.Generic;
 
@@ -11,24 +12,37 @@ namespace PracticaPOO
 
         static void Main(string[] args)
         {
-
             //Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
             InicializarCooperativa();
-
 
             // Create options that you want your menu to have
             opcionesMenu = new List<ConsoleMenuOption>
             {
                 new ConsoleMenuOption("1 - Administrar Granja", AdministrarGranja),
                 new ConsoleMenuOption("2 - Animales", AnimalesSubMenu),
-                //new ConsoleMenuOption("3 - Trabajadores", TrabSubMenu),
-                //new ConsoleMenuOption("4 - Productos", ProdSubMenu),
                 new ConsoleMenuOption("3 - Inventario", RptInventario),
                 new ConsoleMenuOption("4 - Acerca De...", MostrarAcercaDe),
                 new ConsoleMenuOption("5 - Salir", () => Environment.Exit(0))
             };
 
-            ConsoleMenu.CreateMenu(opcionesMenu);
+            try
+            {
+                ConsoleMenu.CreateMenu(opcionesMenu);
+            }
+            catch (ArgumentNullException e)
+            {
+                MostrarMensaje("Se produjo un error de Nulos");
+            }
+            catch (DivideByZeroException e2)
+            {
+                MostrarMensaje("Se produjo un error de División por Cero");
+            }
+            catch (ErrorCooperativa e3)
+            {
+                MostrarMensaje("Se produjo un error de Cooperativa");
+            }
+
+            MostrarMensaje("Chao...");
         }
 
         private static void AdministrarGranja()
@@ -122,7 +136,7 @@ namespace PracticaPOO
         {
             var menuAdministrar = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Tocino", () => MostrarMensaje("\r\tNo me maten")),
+                new ConsoleMenuOption("1 - Tocino", () => throw new ErrorCooperativa ("\r\tNo me maten")),
                 new ConsoleMenuOption("2 - Chicharron", () => MostrarMensaje("\r\tHoy se come Chifrijo"))
             };
 

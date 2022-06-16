@@ -17,7 +17,7 @@
   <Class Name="PracticaPOO.Cooperativa">
     <Position X="24.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAAAAAAAAAAAAABAAAAAAIAAAAAABQCAACA=</HashCode>
+      <HashCode>gABAAAAAAAAAAAAAAAAAAABAAAAAAIAAAAAABQCAACA=</HashCode>
       <FileName>Clases\Cooperativa.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,7 +31,7 @@
   <Class Name="PracticaPOO.Fruta">
     <Position X="16.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>Clases\Fruta.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -45,7 +45,7 @@
   <Class Name="PracticaPOO.Grano">
     <Position X="20" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>Clases\Grano.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -59,14 +59,14 @@
   <Class Name="PracticaPOO.Legumbre">
     <Position X="14.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>Clases\Legumbre.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PracticaPOO.Lote" BaseTypeListCollapsed="true">
     <Position X="19.25" Y="1.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AABAAAAAAABAAAAAAAAAAAAAACAAAQAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAACAAAQAAAAAAAAAAAAA=</HashCode>
       <FileName>Clases\Lote.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -81,7 +81,7 @@
   <Class Name="PracticaPOO.Producto">
     <Position X="11.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAQAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAgAAQAAAAAAAAAAAAAQAAAAA=</HashCode>
       <FileName>Clases\Producto.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -95,7 +95,7 @@
   <Class Name="PracticaPOO.Semilla">
     <Position X="18.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>Clases\Semilla.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -172,8 +172,15 @@
       <FileName>Clases\CentroAcopio.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="PracticaPOO.Clases.ErrorCooperativa">
+    <Position X="28.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Clases\ErrorCooperativa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="PracticaPOO.IProductor" Collapsed="true">
-    <Position X="25" Y="3" Width="1.5" />
+    <Position X="26.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaz\IProductor.cs</FileName>

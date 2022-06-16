@@ -9,20 +9,13 @@
         public Lote(Cooperativa coop)
 		{
 			cooperativa = coop;
-
-		}
-
-		public void Cultivar(Producto producto)
-		{
-			this.producto = producto;
-			cooperativa.Gastar(producto.Precio);
 		}
 
 		public void Producir(Producto producto)
 		{
-			this.producto = producto;
-
 			cooperativa.Gastar(producto.Precio);
+
+			this.producto = producto;					
 		}
 	}
 }

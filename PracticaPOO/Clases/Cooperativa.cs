@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PracticaPOO.Clases;
+using System;
 using System.Collections.Generic;
 
 namespace PracticaPOO
@@ -15,6 +16,8 @@ namespace PracticaPOO
             bodegas = new CentroAcopio(10);
             lotes = new List<Lote>();
         }
+
+        #region Control Contable
 
         public void Abonar(decimal monto)
         {
@@ -33,8 +36,12 @@ namespace PracticaPOO
                 Dinero -= monto;
             }
             else
-                throw new Exception("No hay saldo para retirar ese monto");
+                throw new ErrorCooperativa("No hay saldo para retirar ese monto");
         }
+
+        #endregion
+
+        #region Control de Inventarios
 
         public void SimularExistenciasDeProductos()
         {
@@ -45,7 +52,7 @@ namespace PracticaPOO
             bodegas.GuardarProducto(new Huevos());
             bodegas.GuardarProducto(new Huevos());
 
-            bodegas.GuardarProducto(new Fruta { Tipo= Enums.Fruta.Fresa });
+            bodegas.GuardarProducto(new Fruta { Tipo = Enums.Fruta.Fresa });
             bodegas.GuardarProducto(new Fruta { Tipo = Enums.Fruta.Fresa });
             bodegas.GuardarProducto(new Fruta { Tipo = Enums.Fruta.Mora });
             bodegas.GuardarProducto(new Fruta { Tipo = Enums.Fruta.Piña });
@@ -55,5 +62,15 @@ namespace PracticaPOO
         {
             bodegas.ImprimirReporte();
         }
+
+        #endregion
+
+        #region Producción
+
+        public void Cultivar()
+        { 
+        }
+
+        #endregion
     }
 }
