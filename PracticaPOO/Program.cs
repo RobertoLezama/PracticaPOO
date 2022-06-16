@@ -81,8 +81,8 @@ namespace PracticaPOO
         public static void MostrarMensaje(string mensaje)
         {
             Console.WriteLine(mensaje);
-            Console.WriteLine("> Presione cualquier tecla para continuar");
-            Console.ReadKey();
+            Console.WriteLine("Presione cualquier tecla para continuar . . .");
+            Console.ReadKey(true);
         }
 
         private static void AdministrarOpcion1()
@@ -144,15 +144,9 @@ namespace PracticaPOO
             Console.WriteLine("\t\tVersión: 2.0.");
             Console.WriteLine("\t\tProgramadores: Heiner Morales, Roberto Lezama y Leidy Monge.");
             Console.WriteLine();
-            Console.WriteLine("\t\tPresione la tecla Escape o x para volver al Menu Principal");
+            Console.WriteLine("\t\tPresione cualquier tecla para continuar . . .");
 
-            ConsoleKeyInfo keyinfo;
-            keyinfo = Console.ReadKey();
-
-            if (keyinfo.Key == ConsoleKey.Escape || keyinfo.Key == ConsoleKey.X)
-            {
-                ConsoleMenu.CreateMenu(opcionesMenu, "", true);
-            }
+            Console.ReadKey(true);
         }
 
         private static void InicializarCooperativa()

@@ -12,9 +12,8 @@ namespace PracticaPOO.UI
         private static string template;
         private static int lenght;
 
-        internal static void CreateMenu(List<ConsoleMenuOption> options, string Titulo = "", bool isSubmenu = false)
+        internal static void CreateMenu(List<ConsoleMenuOption> options, string Titulo = "Menu Principal", bool isSubmenu = false)
         {
-            Titulo = string.IsNullOrEmpty(Titulo) ? "Menu Principal" : Titulo;
             //Esto se crea para que cuando entramos a un submenu se alinie y se le dibujen los caracteres del marco dinámicamente
             subMenu = isFirstTime && isSubmenu ? true : false;
 
@@ -27,9 +26,9 @@ namespace PracticaPOO.UI
             do
             {
                 // Write the menu out
-               ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
+                ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
 
-                keyinfo = Console.ReadKey();
+                keyinfo = Console.ReadKey(true);
 
                 // Handle each key input (down arrow will write the menu again with a different selected item)
                 if (keyinfo.Key == ConsoleKey.DownArrow)
@@ -38,18 +37,17 @@ namespace PracticaPOO.UI
                     {
                         selectMenuIndex++;
                         ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
-                        //Console.BackgroundColor = ConsoleColor.Black;
                     }
                     else
                         OpciónInválida(selectMenuIndex + 2);
                 }
+
                 if (keyinfo.Key == ConsoleKey.UpArrow)
                 {
                     if (selectMenuIndex - 1 >= 0)
                     {
                         selectMenuIndex--;
                         ConsoleMenu.WriteMenu(options, options[selectMenuIndex], Titulo);
-                        //Console.BackgroundColor = ConsoleColor.Black;
                     }
                 }
 
@@ -60,7 +58,7 @@ namespace PracticaPOO.UI
                     if (dígito <= options.Count)
                     {
                         options[dígito - 1].Selected.Invoke();
-                        selectMenuIndex = 0;
+                        selectMenuIndex = dígito - 1;
                     }
                     else
                     {
@@ -72,26 +70,25 @@ namespace PracticaPOO.UI
                 if (keyinfo.Key == ConsoleKey.Enter)
                 {
                     options[selectMenuIndex].Selected.Invoke();
-                    selectMenuIndex = 0;
                 }
-                //Esta validación es para cuando salimos con ESC o X se le dibuje de nuevo el marco y quede alineado
+
+                //Esta validación es para cuando salimos con ESC se le dibuje de nuevo el marco y quede alineado
                 if (isFirstTime)
                 {
                     isFirstTime = false;
                     subMenu = true;
                 };
             }
-            while (keyinfo.Key != ConsoleKey.Escape && keyinfo.Key != ConsoleKey.X);
-
-            
+            while (keyinfo.Key != ConsoleKey.Escape);
         }
 
         private static void OpciónInválida(int opción)
         {
             Console.WriteLine($"\r\tLa opción ({opción}) no existe");
+
             //Añadimos estas lineas porque fue la forma en la que se logró imprimir la opción invalida, sin estas no se imprime.
-            Console.WriteLine("> Presione cualquier tecla para continuar");
-            Console.ReadKey();
+            Console.WriteLine("Presione cualquier tecla para continuar . . .");
+            Console.ReadKey(true);
         }
 
         internal static void WriteMenu(List<ConsoleMenuOption> options, ConsoleMenuOption selectedOption, string Titulo)
@@ -103,7 +100,7 @@ namespace PracticaPOO.UI
                 if (option.Name.Contains('║'))
                 {
                     option.Name = option.Name.Replace('║', ' ').Trim();
-                } 
+                }
             }
 
             lenght = options.Max(o => o.Name.Length);
@@ -135,7 +132,7 @@ namespace PracticaPOO.UI
             Console.WriteLine(esquinaSuper);
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
             Titulo = Titulo.PadRight(lenght, ' ').PadLeft(lenght, ' ');
-            Console.WriteLine(string.Format(template,Titulo));
+            Console.WriteLine(string.Format(template, Titulo));
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
             string esquinaMedio = new string('═', margen).Substring(0, 1).Replace('═', '╠') + new string('═', margen).Substring(1, margen - 2) + new string('═', margen).Substring(margen - 1).Replace('═', '╣');
             Console.WriteLine(esquinaMedio);
@@ -144,6 +141,7 @@ namespace PracticaPOO.UI
             {
                 if (option == selectedOption)
                 {
+                    Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                 }
                 else
@@ -157,9 +155,10 @@ namespace PracticaPOO.UI
 
                 Console.WriteLine(option.Name);
             }
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.SetCursorPosition((Console.WindowWidth - margen) / 2, Console.CursorTop);
 
-            string esquina = new string('═', margen).Substring(0,1).Replace('═', '╚') + new string('═', margen).Substring(1, margen - 2) + new string('═', margen).Substring(margen - 1).Replace('═', '╝');
+            string esquina = new string('═', margen).Substring(0, 1).Replace('═', '╚') + new string('═', margen).Substring(1, margen - 2) + new string('═', margen).Substring(margen - 1).Replace('═', '╝');
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(esquina);
 
