@@ -8,6 +8,7 @@ namespace PracticaPOO
 {
     public class CentroAcopio
     {
+        
         List<Producto> productos;
         
         public int Capacidad { get; private set; }
@@ -41,12 +42,21 @@ namespace PracticaPOO
         public void ImprimirReporte()
         {
             var productosPorTipo = productos.GroupBy(p => p.ToString());
-
+            int tamProdMax = productosPorTipo.Max(p => p.Key.Length);
+            tamProdMax = tamProdMax > 8 ? tamProdMax : 8;
+            var template = "\r║  {0," + tamProdMax + "}   ║  {1, 8}   ║";
+            //Console.WriteLine("\r"+new string('═', tamProdMax+21));
+            string esquinaSuper = "\r" +new string('═', tamProdMax + 21).Substring(0, 1).Replace('═', '╔') + new string('═', tamProdMax + 21).Substring(1, tamProdMax + 19) + new string('═', tamProdMax + 21).Substring(tamProdMax + 20).Replace('═', '╗');
+            Console.WriteLine(esquinaSuper);
+            Console.WriteLine(string.Format(template, "Producto".PadRight(tamProdMax, ' '), "Cantidad".PadRight(tamProdMax, ' ')));
+            string esquinaMedio = new string('═', tamProdMax + 21).Substring(0, 1).Replace('═', '╠') + new string('═', tamProdMax + 21).Substring(1, tamProdMax + 19) + new string('═', tamProdMax + 21).Substring(tamProdMax + 20).Replace('═', '╣');
+            Console.WriteLine(esquinaMedio);
             foreach (var prod in productosPorTipo)
             {
-                Console.WriteLine( $"Nombre: {prod.Key}. Cantidad: {prod.Count()}" );
+                Console.WriteLine(string.Format(template, prod.Key.PadRight(tamProdMax, ' '), prod.Count()));
             }
-
+            string esquina = new string('═', tamProdMax + 21).Substring(0, 1).Replace('═', '╚') + new string('═', tamProdMax + 21).Substring(1, tamProdMax + 19) + new string('═', tamProdMax + 21).Substring(tamProdMax + 20).Replace('═', '╝');
+            Console.WriteLine(esquina);
             //Imprimir Existencias / Capacidad
 
             Console.ReadLine();
