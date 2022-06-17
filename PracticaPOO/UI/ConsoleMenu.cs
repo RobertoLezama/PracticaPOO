@@ -87,6 +87,7 @@ namespace PracticaPOO.UI
             Console.WriteLine($"\r\tLa opción ({opción}) no existe");
 
             //Añadimos estas lineas porque fue la forma en la que se logró imprimir la opción invalida, sin estas no se imprime.
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("Presione cualquier tecla para continuar . . .");
             Console.ReadKey(true);
         }

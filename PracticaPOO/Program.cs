@@ -95,6 +95,7 @@ namespace PracticaPOO
         public static void MostrarMensaje(string mensaje)
         {
             Console.WriteLine(mensaje);
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("Presione cualquier tecla para continuar . . .");
             Console.ReadKey(true);
         }
@@ -145,7 +146,7 @@ namespace PracticaPOO
 
         private static void MostrarAcercaDe()
         {
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
 
             Console.Clear();
 
@@ -158,6 +159,7 @@ namespace PracticaPOO
             Console.WriteLine("\t\tVersión: 2.0.");
             Console.WriteLine("\t\tProgramadores: Heiner Morales, Roberto Lezama y Leidy Monge.");
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("\t\tPresione cualquier tecla para continuar . . .");
 
             Console.ReadKey(true);
