@@ -14,6 +14,11 @@ namespace PracticaPOO.UI
 
         internal static void CreateMenu(List<ConsoleMenuOption> options, string Titulo = "Menu Principal", bool isSubmenu = false)
         {
+            for (int i = 0; i < options.Count; i++)
+            {
+                options[i].Name = $"{i + 1} - " + options[i].Name;
+            };
+
             //Esto se crea para que cuando entramos a un submenu se alinie y se le dibujen los caracteres del marco dinámicamente
             subMenu = isFirstTime && isSubmenu ? true : false;
 

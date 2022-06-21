@@ -19,12 +19,12 @@ namespace PracticaPOO
             // Create options that you want your menu to have
             opcionesMenu = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Administrar Granja", AdministrarGranja),
-                new ConsoleMenuOption("2 - Animales", AnimalesSubMenu),
-                new ConsoleMenuOption("3 - Inventario", RptInventario),
-                new ConsoleMenuOption("4 - Cultivos", CultivosSubMenu),
-                new ConsoleMenuOption("5 - Acerca De...", MostrarAcercaDe),
-                new ConsoleMenuOption("6 - Salir", () => Environment.Exit(0))
+                new ConsoleMenuOption("Administrar Granja", AdministrarGranja),
+                new ConsoleMenuOption("Animales", AnimalesSubMenu),
+                new ConsoleMenuOption("Inventario", RptInventario),
+                new ConsoleMenuOption("Cultivos", CultivosSubMenu),
+                new ConsoleMenuOption("Acerca De...", MostrarAcercaDe),
+                new ConsoleMenuOption("Salir", () => Environment.Exit(0))
             };
 
             try
@@ -51,8 +51,8 @@ namespace PracticaPOO
         {
             var menuAdministrar = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Opcion 1", AdministrarOpcion1),
-                new ConsoleMenuOption("2 - Opción 2", () =>  MostrarMensaje("\r\tEsta es la opcion 2"))
+                new ConsoleMenuOption("Opcion 1", AdministrarOpcion1),
+                new ConsoleMenuOption("Opción 2", () =>  MostrarMensaje("\r\tEsta es la opcion 2"))
             };
 
             ConsoleMenu.CreateMenu(menuAdministrar, "Administrar las opicones del menú", true);
@@ -62,41 +62,32 @@ namespace PracticaPOO
         {
             var menuAnimales = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Vacas", AccionesVacas),
-                new ConsoleMenuOption("2 - Gallinas", AccionesGallinas),
-                new ConsoleMenuOption("3 - Cerdos", AccionesCerdos),
+                new ConsoleMenuOption("Vacas", AccionesVacas),
+                new ConsoleMenuOption("Gallinas", AccionesGallinas),
+                new ConsoleMenuOption("Cerdos", AccionesCerdos),
             };
             ConsoleMenu.CreateMenu(menuAnimales, "Animales", true);
         }
 
         private static void CultivosSubMenu()
         {
-            var menuCultivos = new List<ConsoleMenuOption>
+            var menuCultivos1 = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Producir", CultivosMenu),
-                new ConsoleMenuOption("2 - Imprimir Cultivos", RptInventario),
+                new ConsoleMenuOption("Producir", CultivosMenu),
+                new ConsoleMenuOption("Imprimir Cultivos", RptInventario),
             };
 
-            ConsoleMenu.CreateMenu(menuCultivos, "Cultivos", true);
+            ConsoleMenu.CreateMenu(menuCultivos1, "Cultivos", true);
         }
 
         private static void CultivosMenu()
         {
             var menuProducir = new List<ConsoleMenuOption>
-
-
-            int index = 1;
-
-            for(int i = 0; i < menuProducir.Count; i++)
             {
-                index++;
-            }
-
-            {
-                new ConsoleMenuOption($"{index} - Granos", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Grano)), "Granos")),
-                new ConsoleMenuOption($"{index} - Frutas", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Fruta)), "Granos")),
-                new ConsoleMenuOption($"{index} - Legumbres",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Legumbre)), "Granos")),
-                new ConsoleMenuOption($"{index} - Semillas",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Semilla)), "Granos")),
+                new ConsoleMenuOption("Granos", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Grano)), "Granos")),
+                new ConsoleMenuOption("Frutas", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Fruta)), "Granos")),
+                new ConsoleMenuOption("Legumbres",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Legumbre)), "Granos")),
+                new ConsoleMenuOption("Semillas",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Semilla)), "Granos")),
             };
 
             ConsoleMenu.CreateMenu(menuProducir, "Producir", true);
@@ -104,15 +95,14 @@ namespace PracticaPOO
 
         private static void SubMenuCultivos(Array cultivos, string titulo)
         {
-            var menuCultivos = new List<ConsoleMenuOption>();
-            int num = 1;
+            //Inicializamos variable de tipo lista para agregar las opciones de menú.
+            var menuCultivos2 = new List<ConsoleMenuOption>();
             foreach (var item in cultivos)
             {
-                menuCultivos.Add(new ConsoleMenuOption($"{num} - {item}", () => MostrarMensaje($"Produciendo {item}")));
-                num++;
+                menuCultivos2.Add(new ConsoleMenuOption($"{item}", () => MostrarMensaje($"Produciendo {item}")));
             }
 
-            ConsoleMenu.CreateMenu(menuCultivos, titulo, true);
+            ConsoleMenu.CreateMenu(menuCultivos2, titulo, true);
         }
 
         private static void RptInventario()
@@ -152,8 +142,8 @@ namespace PracticaPOO
         {
             var menuAdministrar = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Opcion 1.1", () => MostrarMensaje("\r\tEsta es la opcion 1.1")),
-                new ConsoleMenuOption("2 - Opción 1.2", () => MostrarMensaje("\r\tEsta es la opcion 1.2"))
+                new ConsoleMenuOption("Opcion 1.1", () => MostrarMensaje("\r\tEsta es la opcion 1.1")),
+                new ConsoleMenuOption("Opción 1.2", () => MostrarMensaje("\r\tEsta es la opcion 1.2"))
             };
             ConsoleMenu.CreateMenu(menuAdministrar, "Administrar Sub Opción 1", true);
         }
@@ -162,9 +152,9 @@ namespace PracticaPOO
         {
             var menuAdministrar = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Leche", () => MostrarMensaje("\r\tMOOOOOOOO")),
-                new ConsoleMenuOption("2 - Queso", () => MostrarMensaje("\r\tMAS MOOOOOOOOOO")),
-                new ConsoleMenuOption("3 - Carne", () => MostrarMensaje("\r\tOTRA VEZ MOOOOO"))
+                new ConsoleMenuOption("Leche", () => MostrarMensaje("\r\tMOOOOOOOO")),
+                new ConsoleMenuOption("Queso", () => MostrarMensaje("\r\tMAS MOOOOOOOOOO")),
+                new ConsoleMenuOption("Carne", () => MostrarMensaje("\r\tOTRA VEZ MOOOOO"))
             };
 
             ConsoleMenu.CreateMenu(menuAdministrar, "Vacas", true);
@@ -174,8 +164,8 @@ namespace PracticaPOO
         {
             var menuAdministrar = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Pollo", () => MostrarMensaje("\r\tEsta es la opcion de pollo")),
-                new ConsoleMenuOption("2 - Huevos", () => MostrarMensaje("\r\tEsta es la opcion de huevo"))
+                new ConsoleMenuOption("Pollo", () => MostrarMensaje("\r\tEsta es la opcion de pollo")),
+                new ConsoleMenuOption("Huevos", () => MostrarMensaje("\r\tEsta es la opcion de huevo"))
             };
 
             ConsoleMenu.CreateMenu(menuAdministrar, "Gallinas", true);
@@ -185,8 +175,8 @@ namespace PracticaPOO
         {
             var menuAdministrar = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("1 - Tocino", () => throw new ErrorCooperativa ("\r\tNo me maten")),
-                new ConsoleMenuOption("2 - Chicharron", () => MostrarMensaje("\r\tHoy se come Chifrijo"))
+                new ConsoleMenuOption("Tocino", () => throw new ErrorCooperativa ("\r\tNo me maten")),
+                new ConsoleMenuOption("Chicharron", () => MostrarMensaje("\r\tHoy se come Chifrijo"))
             };
 
             ConsoleMenu.CreateMenu(menuAdministrar, "Cerdos", true);
