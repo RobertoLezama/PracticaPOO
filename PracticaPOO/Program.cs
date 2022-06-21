@@ -83,11 +83,20 @@ namespace PracticaPOO
         private static void CultivosMenu()
         {
             var menuProducir = new List<ConsoleMenuOption>
+
+
+            int index = 1;
+
+            for(int i = 0; i < menuProducir.Count; i++)
             {
-                new ConsoleMenuOption("1 - Granos", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Grano)), "Granos")),
-                new ConsoleMenuOption("2 - Frutas", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Fruta)), "Granos")),
-                new ConsoleMenuOption("3 - Legumbres",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Legumbre)), "Granos")),
-                new ConsoleMenuOption("4 - Semillas",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Semilla)), "Granos")),
+                index++;
+            }
+
+            {
+                new ConsoleMenuOption($"{index} - Granos", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Grano)), "Granos")),
+                new ConsoleMenuOption($"{index} - Frutas", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Fruta)), "Granos")),
+                new ConsoleMenuOption($"{index} - Legumbres",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Legumbre)), "Granos")),
+                new ConsoleMenuOption($"{index} - Semillas",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Semilla)), "Granos")),
             };
 
             ConsoleMenu.CreateMenu(menuProducir, "Producir", true);
