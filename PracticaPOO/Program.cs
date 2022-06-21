@@ -8,7 +8,7 @@ namespace PracticaPOO
 {
     public class Programa
     {
-        static ProdVegetal PrV = new ProdVegetal();
+        //static ProdVegetal PrV = new ProdVegetal();
         static Cooperativa coop = new Cooperativa();
         static List<ConsoleMenuOption> opcionesMenu;
 
