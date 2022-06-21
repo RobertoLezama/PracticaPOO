@@ -2,6 +2,7 @@
 using PracticaPOO.UI;
 using System;
 using System.Collections.Generic;
+using PracticaPOO.Enums;
 
 namespace PracticaPOO
 {
@@ -21,8 +22,9 @@ namespace PracticaPOO
                 new ConsoleMenuOption("1 - Administrar Granja", AdministrarGranja),
                 new ConsoleMenuOption("2 - Animales", AnimalesSubMenu),
                 new ConsoleMenuOption("3 - Inventario", RptInventario),
-                new ConsoleMenuOption("4 - Acerca De...", MostrarAcercaDe),
-                new ConsoleMenuOption("5 - Salir", () => Environment.Exit(0))
+                new ConsoleMenuOption("4 - Cultivos", CultivosSubMenu),
+                new ConsoleMenuOption("5 - Acerca De...", MostrarAcercaDe),
+                new ConsoleMenuOption("6 - Salir", () => Environment.Exit(0))
             };
 
             try
@@ -65,6 +67,43 @@ namespace PracticaPOO
                 new ConsoleMenuOption("3 - Cerdos", AccionesCerdos),
             };
             ConsoleMenu.CreateMenu(menuAnimales, "Animales", true);
+        }
+
+        private static void CultivosSubMenu()
+        {
+            var menuCultivos = new List<ConsoleMenuOption>
+            {
+                new ConsoleMenuOption("1 - Producir", CultivosMenu),
+                new ConsoleMenuOption("2 - Imprimir Cultivos", RptInventario),
+            };
+
+            ConsoleMenu.CreateMenu(menuCultivos, "Cultivos", true);
+        }
+
+        private static void CultivosMenu()
+        {
+            var menuProducir = new List<ConsoleMenuOption>
+            {
+                new ConsoleMenuOption("1 - Granos", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Grano)), "Granos")),
+                new ConsoleMenuOption("2 - Frutas", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Fruta)), "Granos")),
+                new ConsoleMenuOption("3 - Legumbres",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Legumbre)), "Granos")),
+                new ConsoleMenuOption("4 - Semillas",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Semilla)), "Granos")),
+            };
+
+            ConsoleMenu.CreateMenu(menuProducir, "Producir", true);
+        }
+
+        private static void SubMenuCultivos(Array cultivos, string titulo)
+        {
+            var menuCultivos = new List<ConsoleMenuOption>();
+            int num = 1;
+            foreach (var item in cultivos)
+            {
+                menuCultivos.Add(new ConsoleMenuOption($"{num} - {item}", () => MostrarMensaje($"Produciendo {item}")));
+                num++;
+            }
+
+            ConsoleMenu.CreateMenu(menuCultivos, titulo, true);
         }
 
         private static void RptInventario()
