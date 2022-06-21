@@ -8,6 +8,7 @@ namespace PracticaPOO
 {
     public class Programa
     {
+        static ProdVegetal PrV = new ProdVegetal();
         static Cooperativa coop = new Cooperativa();
         static List<ConsoleMenuOption> opcionesMenu;
 
@@ -85,9 +86,9 @@ namespace PracticaPOO
             var menuProducir = new List<ConsoleMenuOption>
             {
                 new ConsoleMenuOption("Granos", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Grano)), "Granos")),
-                new ConsoleMenuOption("Frutas", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Fruta)), "Granos")),
-                new ConsoleMenuOption("Legumbres",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Legumbre)), "Granos")),
-                new ConsoleMenuOption("Semillas",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Semilla)), "Granos")),
+                new ConsoleMenuOption("Frutas", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Fruta)), "Fruta")),
+                new ConsoleMenuOption("Legumbres",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Legumbre)), "Legumbre")),
+                new ConsoleMenuOption("Semillas",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Semilla)), "Semilla")),
             };
 
             ConsoleMenu.CreateMenu(menuProducir, "Producir", true);
@@ -108,6 +109,11 @@ namespace PracticaPOO
         private static void RptInventario()
         {
             coop.ImprimirInventario();
+        }
+
+        private static void ImprimirCultivos()
+        {
+
         }
 
         //private static void TrabSubMenu()

@@ -13,10 +13,11 @@ namespace PracticaPOO
 
 		public abstract int Tiempo { get; set; }
 
-		public Producto(string nombre, decimal precio)
+		public Producto(string nombre, decimal precio, int tiempo)
 		{
 			Nombre = nombre;
 			Precio = precio;
+			Tiempo = tiempo;
 		}
 
         public override string ToString()
