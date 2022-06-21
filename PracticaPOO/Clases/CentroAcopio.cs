@@ -6,7 +6,7 @@ namespace PracticaPOO
 {
     public class CentroAcopio
     {
-        
+
         List<Producto> productos;
 
         public int Capacidad { get; private set; }

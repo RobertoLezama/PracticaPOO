@@ -14,7 +14,7 @@ namespace PracticaPOO
         public Cooperativa()
         {
             bodegas = new CentroAcopio(10);
-            lotes = new List<Lote>();
+            lotes = new List<Lote>(5);
         }
 
         #region Control Contable

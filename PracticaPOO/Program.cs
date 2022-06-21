@@ -74,7 +74,7 @@ namespace PracticaPOO
         {
             var menuCultivos1 = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("Producir", CultivosMenu),
+                new ConsoleMenuOption("Cultivar", CultivosMenu),
                 new ConsoleMenuOption("Imprimir Cultivos", RptInventario),
             };
 
@@ -91,7 +91,7 @@ namespace PracticaPOO
                 new ConsoleMenuOption("Semillas",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Semilla)), "Semilla")),
             };
 
-            ConsoleMenu.CreateMenu(menuProducir, "Producir", true);
+            ConsoleMenu.CreateMenu(menuProducir, "Cultivar", true);
         }
 
         private static void SubMenuCultivos(Array cultivos, string titulo)
@@ -100,11 +100,18 @@ namespace PracticaPOO
             var menuCultivos2 = new List<ConsoleMenuOption>();
             foreach (var item in cultivos)
             {
-                menuCultivos2.Add(new ConsoleMenuOption($"{item}", () => MostrarMensaje($"Produciendo {item}")));
+                menuCultivos2.Add(new ConsoleMenuOption($"{item}", () => Cultivando()));
             }
 
             ConsoleMenu.CreateMenu(menuCultivos2, titulo, true);
         }
+
+        private static void Cultivando()
+        {
+            coop.
+        }
+
+
 
         private static void RptInventario()
         {

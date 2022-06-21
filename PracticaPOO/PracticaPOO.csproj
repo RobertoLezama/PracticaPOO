@@ -49,6 +49,7 @@
     <Compile Include="Clases\Cerdo.cs" />
     <Compile Include="Clases\Control de tiempo.cs" />
     <Compile Include="Clases\Corral.cs" />
+    <Compile Include="Clases\Finca.cs" />
     <Compile Include="Clases\Gallinero.cs" />
     <Compile Include="Clases\Leche.cs" />
     <Compile Include="Clases\CentroAcopio.cs" />
