@@ -6,7 +6,6 @@ namespace PracticaPOO
 {
     public class CentroAcopio
     {
-
         List<Producto> productos;
 
         public int Capacidad { get; private set; }
@@ -40,21 +39,6 @@ namespace PracticaPOO
         public void ImprimirReporte()
         {
             Console.Clear();
-
-            //string pattern = "a";
-
-            //int indexOf = 0;
-
-            //while (indexOf != -1)
-            //{
-            //    indexOf = richTextBox1.Text.IndexOf(pattern, indexOf);
-            //    if (indexOf != -1)
-            //    {
-            //        richTextBox1.Select(indexOf, pattern.Length);
-            //        richTextBox1.SelectionColor = Color.Red;
-            //        indexOf += pattern.Length;
-            //    }
-            //}
 
             for (int i = 0; i < 5; i++)
             {

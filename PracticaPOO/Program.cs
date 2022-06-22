@@ -98,6 +98,7 @@ namespace PracticaPOO
         {
             //Inicializamos variable de tipo lista para agregar las opciones de menú.
             var menuCultivos2 = new List<ConsoleMenuOption>();
+
             foreach (var item in cultivos)
             {
                 menuCultivos2.Add(new ConsoleMenuOption($"{item}", () => Cultivando()));
@@ -108,9 +109,8 @@ namespace PracticaPOO
 
         private static void Cultivando()
         {
+            coop.Cultivar(new Grano(Enums.Grano.Arroz));
         }
-
-
 
         private static void RptInventario()
         {
@@ -198,10 +198,9 @@ namespace PracticaPOO
         private static void InicializarCooperativa()
         {
             //Hacer depósito Inicial
-            coop.Abonar(500);
+            coop.Abonar(5000);
 
             coop.SimularExistenciasDeProductos();
-            coop.LotesProducto();
         }
     }
 }

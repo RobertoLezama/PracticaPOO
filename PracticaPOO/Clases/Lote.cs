@@ -2,22 +2,25 @@
 {
     public class Lote : IProductor
     {
-		Cooperativa cooperativa;
+        Cooperativa cooperativa;
 
-		 public string NombreLote;
-		public Producto producto { get; set; }
+        public Producto Producto { get; private set; }
 
-        public Lote(string nombre, Producto producto)
-		{
-			NombreLote = nombre;
-			this.producto = producto;
-		}
+        public Lote(Cooperativa coop)
+        {
+            cooperativa = coop;
+        }
 
-		public void Producir(Producto producto)
-		{
-			cooperativa.Gastar(producto.Precio);
+        public Lote(Cooperativa coop, Producto producto) : this(coop)
+        {
+            Producir(producto);
+        }
 
-								
-		}
-	}
+        public void Producir(Producto producto)
+        {
+            cooperativa.Gastar(producto.Precio);
+
+            this.Producto = producto;
+        }
+    }
 }

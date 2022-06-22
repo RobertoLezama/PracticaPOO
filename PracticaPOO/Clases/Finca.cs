@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PracticaPOO.Clases
 {
     public class Finca
     {
-       List<Lote> lotes;
+        List<Lote> lotes;
+
+        Cooperativa cooperativa;
 
         public int Capacidad { get; private set; }
 
@@ -16,40 +16,42 @@ namespace PracticaPOO.Clases
 
         public int TotalLotesDisponibles => Capacidad - lotes.Count;
 
-        public Finca(List<Lote> lotes, int capacidad)
+        public Finca(Cooperativa coop, int capacidad)
         {
-            this.lotes = lotes;
+            this.cooperativa = coop;
+            this.lotes = new List<Lote>();
 
             Capacidad = capacidad;
         }
 
-        //public bool Cultivo(Lote lote)
-        //{
-        //    if (lotes.Count >= Capacidad)
-        //    {
-        //        throw new Exception("No hay capacidad suficiente para Cultivar en el Lote: " + lote);
-        //    }
+        public bool Cultivar(Producto producto)
+        {
+            if (lotes.Count >= Capacidad)
+            {
+                throw new Exception("No hay capacidad suficiente para Cultivar el producto: " + producto);
+            }
 
-        //    lotes.Add(lote);
-        //    return true;
-        //}
+            lotes.Add(new Lote(cooperativa, producto));
+            return true;
+        }
 
         //Aquí va su método
         public void ImprimirLotes()
         {
-            if(lotes.Count > Capacidad)
+            if (lotes.Count > Capacidad)
             {
-                throw new Exception("No hay capacidad suficiente para Cultivar en el Lote:"+ lotes);
+                throw new Exception("No hay capacidad suficiente para Cultivar en el Lote:" + lotes);
             }
 
             Console.Clear();
+
             for (int i = 0; i < 5; i++)
             {
                 Console.WriteLine("");
             }
-           
-            int tamProdMax = this.lotes.Max(p => p.producto.Nombre.Length);
-            int tamLotMax = this.lotes.Max(c => c.NombreLote.ToString().Length);
+
+            int tamProdMax = this.lotes.Max(p => p.Producto.Nombre.Length);
+            int tamLotMax = 5;
             tamProdMax = tamProdMax > 8 ? tamProdMax : 8;
             tamLotMax = tamLotMax > 4 ? tamLotMax : 4;
 
@@ -66,7 +68,7 @@ namespace PracticaPOO.Clases
 
             Console.SetCursorPosition((Console.WindowWidth - (tamLotMax + tamProdMax + 13)) / 2, Console.CursorTop);
             Console.WriteLine(string.Format(template, "Lote".PadRight(tamLotMax, ' '), "Producto".PadRight(tamProdMax, ' ')));
-            
+
 
             Console.SetCursorPosition((Console.WindowWidth - (tamLotMax + tamProdMax + 13)) / 2, Console.CursorTop);
 
@@ -82,9 +84,7 @@ namespace PracticaPOO.Clases
             for (int i = 0; i < this.lotes.Count; i++)
             {
                 Console.SetCursorPosition((Console.WindowWidth - (tamLotMax + tamProdMax + 13)) / 2, Console.CursorTop);
-                Console.WriteLine(string.Format(template, this.lotes[i].NombreLote , this.lotes[i].producto.ToString().PadRight(tamProdMax, ' ')));
-               
-
+                Console.WriteLine(string.Format(template, (i + 1).ToString(), this.lotes[i].Producto.ToString().PadRight(tamProdMax, ' ')));
             }
 
             Console.SetCursorPosition((Console.WindowWidth - (tamLotMax + tamProdMax + 13)) / 2, Console.CursorTop);

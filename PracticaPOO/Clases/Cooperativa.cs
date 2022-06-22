@@ -1,6 +1,5 @@
 ﻿using PracticaPOO.Clases;
 using System;
-using System.Collections.Generic;
 
 namespace PracticaPOO
 {
@@ -8,15 +7,13 @@ namespace PracticaPOO
     {
         CentroAcopio bodegas;
         Finca finca;
-        List<Lote> lotes;
 
         public decimal Dinero { get; private set; }
 
         public Cooperativa()
         {
             bodegas = new CentroAcopio(10);
-            lotes = new List<Lote>(5);
-
+            finca = new Finca(this, 5);
         }
 
         #region Control Contable
@@ -33,7 +30,7 @@ namespace PracticaPOO
 
         public void Gastar(decimal monto)
         {
-            if (Dinero > monto)
+            if (Dinero >= monto)
             {
                 Dinero -= monto;
             }
@@ -60,16 +57,6 @@ namespace PracticaPOO
             bodegas.GuardarProducto(new Fruta { Tipo = Enums.Fruta.Piña });
         }
 
-        public void LotesProducto()
-        {
-            lotes.Add(new Lote("Lote 1", new Grano {Tipo = Enums.Grano.Maíz }));
-            lotes.Add(new Lote("Lote 2", new Fruta {Tipo = Enums.Fruta.Fresa }));
-            lotes.Add(new Lote("Lote 3", new Legumbre {Tipo = Enums.Legumbre.Frijoles}));
-            lotes.Add(new Lote("Lote 4", new Semilla {Tipo = Enums.Semilla.Maní}));
-           
-            finca = new Finca(lotes, 5); //Se instancia la finca para poder usar el método imprimir que esta en la clase finca.
-        }
-
         public void ImprimirInventario()
         {
             bodegas.ImprimirReporte();
@@ -84,8 +71,9 @@ namespace PracticaPOO
 
         #region Producción
 
-        public void Cultivar()
+        public void Cultivar(ProdVegetal producto)
         { 
+            finca.Cultivar(producto);
         }
 
         #endregion
