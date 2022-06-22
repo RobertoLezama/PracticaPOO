@@ -75,7 +75,7 @@ namespace PracticaPOO
             var menuCultivos1 = new List<ConsoleMenuOption>
             {
                 new ConsoleMenuOption("Cultivar", CultivosMenu),
-                new ConsoleMenuOption("Imprimir Cultivos", RptInventario),
+                new ConsoleMenuOption("Imprimir Cultivos", ImprimirCultivos),
             };
 
             ConsoleMenu.CreateMenu(menuCultivos1, "Cultivos", true);
@@ -108,7 +108,6 @@ namespace PracticaPOO
 
         private static void Cultivando()
         {
-            coop.
         }
 
 
@@ -120,28 +119,8 @@ namespace PracticaPOO
 
         private static void ImprimirCultivos()
         {
-
+            coop.RptImprimirCultivos(); 
         }
-
-        //private static void TrabSubMenu()
-        //{
-        //    var menuTrabajadores = new List<ConsoleMenuOption>
-        //    {
-        //        new ConsoleMenuOption("1 - Nombre y cargo", AdministrarOpcion1),
-        //        new ConsoleMenuOption("2 - ", () =>  MostrarMensaje("\r\tEsta es la opcion 2"))
-        //    };
-        //    ConsoleMenu.CreateMenu(menuTrabajadores, "Trabajadores", true);
-        //}
-
-        //private static void ProdSubMenu()
-        //{
-        //    var menuProductos = new List<ConsoleMenuOption>
-        //    {
-        //        new ConsoleMenuOption("1 - Opcion 1", AdministrarOpcion1),
-        //        new ConsoleMenuOption("2 - Opción 2", () =>  MostrarMensaje("\r\tEsta es la opcion 2"))
-        //    };
-        //    ConsoleMenu.CreateMenu(menuProductos, "Productos", true);
-        //}
 
         public static void MostrarMensaje(string mensaje)
         {
@@ -222,6 +201,7 @@ namespace PracticaPOO
             coop.Abonar(500);
 
             coop.SimularExistenciasDeProductos();
+            coop.LotesProducto();
         }
     }
 }

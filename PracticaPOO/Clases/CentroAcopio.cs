@@ -97,7 +97,7 @@ namespace PracticaPOO
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(esquinaMedio);
 
-            
+
             foreach (var prod in productosPorTipo)
             {
                 Console.SetCursorPosition((Console.WindowWidth - (tamCantMax + tamProdMax + 13)) / 2, Console.CursorTop);

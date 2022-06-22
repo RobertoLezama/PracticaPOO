@@ -4,18 +4,20 @@
     {
 		Cooperativa cooperativa;
 
-		Producto producto { get; set; }
+		 public string NombreLote;
+		public Producto producto { get; set; }
 
-        public Lote(Cooperativa coop)
+        public Lote(string nombre, Producto producto)
 		{
-			cooperativa = coop;
+			NombreLote = nombre;
+			this.producto = producto;
 		}
 
 		public void Producir(Producto producto)
 		{
 			cooperativa.Gastar(producto.Precio);
 
-			this.producto = producto;					
+								
 		}
 	}
 }
