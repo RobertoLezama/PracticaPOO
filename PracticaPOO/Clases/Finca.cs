@@ -38,11 +38,6 @@ namespace PracticaPOO.Clases
         //Aquí va su método
         public void ImprimirLotes()
         {
-            if (lotes.Count > Capacidad)
-            {
-                throw new Exception("No hay capacidad suficiente para Cultivar en el Lote:" + lotes);
-            }
-
             Console.Clear();
 
             for (int i = 0; i < 5; i++)
