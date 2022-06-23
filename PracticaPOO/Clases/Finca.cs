@@ -65,9 +65,10 @@ namespace PracticaPOO.Clases
             }
 
             //Me trae el lote y el producto.
-            table.ClearRows();
+            tabla.ClearRows();
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            table.SetHeaders("Lotes", "Producto");
+            tabla.SetHeaders("Lotes", "Producto");
+
             for (int i = 0; i < this.lotes.Count; i++)
             {
                 tabla.AddRow((i + 1).ToString(), this.lotes[i].Producto.ToString());
