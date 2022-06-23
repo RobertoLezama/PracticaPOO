@@ -43,10 +43,18 @@ namespace PracticaPOO
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                MostrarMensaje("Se produjo un error: " + ex.Message);
                 Console.ReadKey();
                 return false;
             }
+        }
+
+        public static void MostrarMensaje(string mensaje)
+        {
+            Console.WriteLine(mensaje);
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("Presione cualquier tecla para continuar . . .");
+            Console.ReadKey(true);
         }
 
         public void ImprimirReporte()
