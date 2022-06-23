@@ -57,6 +57,7 @@
     <Compile Include="Clases\FlotillaCamiones.cs" />
     <Compile Include="Clases\Porqueriza.cs" />
     <Compile Include="Clases\Res.cs" />
+    <Compile Include="Clases\Table.cs" />
     <Compile Include="Clases\Tren.cs" />
     <Compile Include="Clases\Fruta.cs" />
     <Compile Include="Clases\Granja.cs" />

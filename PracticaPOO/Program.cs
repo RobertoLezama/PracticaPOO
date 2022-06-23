@@ -110,6 +110,7 @@ namespace PracticaPOO
         private static void Cultivando()
         {
             coop.Cultivar(new Grano(Enums.Grano.Arroz));
+            
         }
 
         private static void RptInventario()
