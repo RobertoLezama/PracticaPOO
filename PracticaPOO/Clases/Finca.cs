@@ -41,13 +41,21 @@ namespace PracticaPOO.Clases
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                MostrarMensaje("Se produjo un error: " + ex.Message);
                 Console.ReadKey();
                 return false; 
             }
         }
 
-        
+        public static void MostrarMensaje(string mensaje)
+        {
+            Console.WriteLine(mensaje);
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("Presione cualquier tecla para continuar . . .");
+            Console.ReadKey(true);
+        }
+
+
         public void ImprimirLotes()
         {
             Console.Clear();
@@ -59,6 +67,7 @@ namespace PracticaPOO.Clases
 
             //Me trae el lote y el producto.
             table.ClearRows();
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
             table.SetHeaders("Lotes", "Producto");
             for (int i = 0; i < this.lotes.Count; i++)
             {
