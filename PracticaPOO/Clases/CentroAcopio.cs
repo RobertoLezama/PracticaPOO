@@ -30,13 +30,24 @@ namespace PracticaPOO
 
         public bool GuardarProducto(Producto prod)
         {
-            if (productos.Count >= Capacidad)
+            try
             {
-                throw new Exception("No hay capacidad suficiente para guardar el producto: " + prod);
-            }
+                if (productos.Count >= Capacidad)
+                {
+                    throw new Exception("No hay capacidad suficiente para guardar el producto: " + prod);
+                }
 
-            productos.Add(prod);
-            return true;
+                    productos.Add(prod);
+                    return true;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadKey();
+                return false;   
+                
+            }
         }
 
         public void ImprimirReporte()
@@ -77,6 +88,7 @@ namespace PracticaPOO
 
             Console.WriteLine(table.ToString());
 
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("Presione cualquier tecla para continuar . . .");
 
             Console.ReadKey(true);

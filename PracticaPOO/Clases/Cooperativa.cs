@@ -55,6 +55,7 @@ namespace PracticaPOO
             bodegas.GuardarProducto(new Fruta { Tipo = Enums.Fruta.Fresa });
             bodegas.GuardarProducto(new Fruta { Tipo = Enums.Fruta.Mora });
             bodegas.GuardarProducto(new Fruta { Tipo = Enums.Fruta.Piña });
+           
         }
 
         public void ImprimirInventario()

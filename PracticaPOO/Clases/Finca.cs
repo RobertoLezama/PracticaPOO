@@ -28,20 +28,28 @@ namespace PracticaPOO.Clases
 
         public bool Cultivar(Producto producto)
         {
-            if (lotes.Count >= Capacidad)
+            try
             {
-                throw new Exception("No hay capacidad suficiente para Cultivar el producto: " + producto);
-            }
+                if (lotes.Count >= Capacidad)
+                {
+                    throw new Exception("No hay capacidad suficiente para Cultivar el producto: " + producto);
+                }
 
-            lotes.Add(new Lote(cooperativa, producto));
-            return true;
+                lotes.Add(new Lote(cooperativa, producto));
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadKey();
+                return false; 
+            }
         }
 
         
         public void ImprimirLotes()
         {
-            
-
             Console.Clear();
 
             for (int i = 0; i < 5; i++)
