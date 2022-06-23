@@ -1,13 +1,12 @@
-﻿using System;
+﻿using ConsoleTable;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using ConsoleTable;
 
 namespace PracticaPOO.Clases
 {
     public class Finca
     {
-        static Table table = new Table();
+        Table tabla = new Table();
         List<Lote> lotes;
 
         Cooperativa cooperativa;
@@ -46,7 +45,6 @@ namespace PracticaPOO.Clases
                 return false; 
             }
         }
-
         
         public void ImprimirLotes()
         {
@@ -58,24 +56,25 @@ namespace PracticaPOO.Clases
             }
 
             //Me trae el lote y el producto.
-            table.ClearRows();
-            table.SetHeaders("Lotes", "Producto");
+            tabla.ClearRows();
+            tabla.SetHeaders("Lotes", "Producto");
+
             for (int i = 0; i < this.lotes.Count; i++)
             {
-                //Console.SetCursorPosition((Console.WindowWidth - (tamLotMax + tamProdMax + 13)) / 2, Console.CursorTop);
-                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                table.AddRow((i + 1).ToString(), this.lotes[i].Producto.ToString());
+                tabla.AddRow((i + 1).ToString(), this.lotes[i].Producto.ToString());
             }
-            Console.WriteLine(table.ToString());
+
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine(tabla.ToString());
 
             //Imprimir Existencias / Capacidad
-            table.ClearRows();
+            tabla.ClearRows();
             int cant = this.lotes.Count;
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            table.SetHeaders("Capacidad", "Produciendo");
-            table.AddRow(Capacidad.ToString(), cant.ToString());
+            tabla.SetHeaders("Capacidad", "Produciendo");
+            tabla.AddRow(Capacidad.ToString(), cant.ToString());
 
-            Console.WriteLine(table.ToString());
+            Console.WriteLine(tabla.ToString());
 
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("Presione cualquier tecla para continuar . . .");

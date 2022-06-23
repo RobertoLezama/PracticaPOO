@@ -1,14 +1,13 @@
-﻿using System;
+﻿using ConsoleTable;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using PracticaPOO.Clases;
-using ConsoleTable;
 
 namespace PracticaPOO
 {
     public class CentroAcopio
     {
-        static Table table = new Table();
+        Table tabla;
         List<Producto> productos;
 
         public int Capacidad { get; private set; }
@@ -26,6 +25,8 @@ namespace PracticaPOO
             Capacidad = capacidad;
 
             productos = new List<Producto>();
+
+            tabla = new Table();
         }
 
         public bool GuardarProducto(Producto prod)
@@ -37,16 +38,14 @@ namespace PracticaPOO
                     throw new Exception("No hay capacidad suficiente para guardar el producto: " + prod);
                 }
 
-                    productos.Add(prod);
-                    return true;
-
+                productos.Add(prod);
+                return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 Console.ReadKey();
-                return false;   
-                
+                return false;
             }
         }
 
@@ -63,30 +62,33 @@ namespace PracticaPOO
                                   .GroupBy(p => p.ToString())
                                   .Select(g => new { Nombre = g.Key, Cantidad = g.Count() })
                                   .OrderByDescending(p => p.Cantidad);
-            
-         
 
-            table.SetHeaders("Producto", "Cantidad");
-            foreach(var prod in productosPorTipo)
+
+
+            tabla.SetHeaders("Producto", "Cantidad");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+
+            foreach (var prod in productosPorTipo)
             {
-                Console.ForegroundColor = ConsoleColor.DarkCyan; 
-                table.AddRow(prod.Nombre, prod.Cantidad.ToString());
+                tabla.AddRow(prod.Nombre, prod.Cantidad.ToString());
             }
 
-            Console.WriteLine(table.ToString());
+            Console.WriteLine(tabla.ToString());
 
             //Imprimir Existencias / Capacidad
-           
+
             int cant = 0;
-            foreach(var prod in productosPorTipo)
+            foreach (var prod in productosPorTipo)
             {
                 cant = cant + prod.Cantidad;
             }
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            table.SetHeaders("Capacidad", "Existencias");
-            table.AddRow(Capacidad.ToString(), cant.ToString());
 
-            Console.WriteLine(table.ToString());
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            tabla.ClearRows();
+            tabla.SetHeaders("Capacidad", "Existencias");
+            tabla.AddRow(Capacidad.ToString(), cant.ToString());
+
+            Console.WriteLine(tabla.ToString());
 
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("Presione cualquier tecla para continuar . . .");
