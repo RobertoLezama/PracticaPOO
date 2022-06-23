@@ -2,19 +2,17 @@
 using PracticaPOO.UI;
 using System;
 using System.Collections.Generic;
-using PracticaPOO.Enums;
 
 namespace PracticaPOO
 {
     public class Programa
     {
-        //static ProdVegetal PrV = new ProdVegetal();
         static Cooperativa coop = new Cooperativa();
         static List<ConsoleMenuOption> opcionesMenu;
 
         static void Main(string[] args)
         {
-            //Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
+            AlinearVentanaConsola();
             InicializarCooperativa();
 
             // Create options that you want your menu to have
@@ -32,20 +30,18 @@ namespace PracticaPOO
             {
                 ConsoleMenu.CreateMenu(opcionesMenu);
             }
-            catch (ArgumentNullException e)
+            catch (ErrorCooperativa ex)
             {
-                MostrarMensaje("Se produjo un error de Nulos");
-            }
-            catch (DivideByZeroException e2)
-            {
-                MostrarMensaje("Se produjo un error de División por Cero");
-            }
-            catch (ErrorCooperativa e3)
-            {
-                MostrarMensaje("Se produjo un error de Cooperativa");
+                MostrarMensaje("Se produjo un error de Cooperativa: " + ex.Message);
             }
 
             MostrarMensaje("Chao...");
+        }
+
+        private static void AlinearVentanaConsola()
+        {
+            Console.SetWindowSize(Console.LargestWindowWidth - 10, Console.LargestWindowHeight - 5);
+            Console.SetWindowPosition(0, 0);
         }
 
         private static void AdministrarGranja()
@@ -85,32 +81,31 @@ namespace PracticaPOO
         {
             var menuProducir = new List<ConsoleMenuOption>
             {
-                new ConsoleMenuOption("Granos", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Grano)), "Granos")),
-                new ConsoleMenuOption("Frutas", () => SubMenuCultivos(Enum.GetValues(typeof(Enums.Fruta)), "Fruta")),
-                new ConsoleMenuOption("Legumbres",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Legumbre)), "Legumbre")),
-                new ConsoleMenuOption("Semillas",() => SubMenuCultivos(Enum.GetValues(typeof(Enums.Semilla)), "Semilla")),
+                new ConsoleMenuOption("Granos", () => SubMenuCultivos(typeof(Grano), typeof(Enums.Grano), "Granos")),
+                new ConsoleMenuOption("Frutas", () => SubMenuCultivos(typeof(Fruta), typeof(Enums.Fruta), "Fruta")),
+                new ConsoleMenuOption("Legumbres",() => SubMenuCultivos(typeof(Legumbre), typeof(Enums.Legumbre), "Legumbre")),
+                new ConsoleMenuOption("Semillas",() => SubMenuCultivos(typeof(Semilla), typeof(Enums.Semilla), "Semilla")),
             };
 
             ConsoleMenu.CreateMenu(menuProducir, "Cultivar", true);
         }
 
-        private static void SubMenuCultivos(Array cultivos, string titulo)
+        private static void SubMenuCultivos(Type vegetal, Type tiposDeVegetal, string titulo)
         {
-            //Inicializamos variable de tipo lista para agregar las opciones de menú.
             var menuCultivos2 = new List<ConsoleMenuOption>();
 
-            foreach (var item in cultivos)
+            foreach (var tipoDeVegetal in Enum.GetValues(tiposDeVegetal))
             {
-                menuCultivos2.Add(new ConsoleMenuOption($"{item}", () => Cultivando()));
+                menuCultivos2.Add(new ConsoleMenuOption($"{tipoDeVegetal}", () => Cultivando((ProdVegetal)Activator.CreateInstance(vegetal, tipoDeVegetal))));
             }
 
             ConsoleMenu.CreateMenu(menuCultivos2, titulo, true);
         }
 
-        private static void Cultivando()
+        private static void Cultivando(ProdVegetal vegetal)
         {
-            coop.Cultivar(new Grano(Enums.Grano.Arroz));
-            
+            if (coop.Cultivar(vegetal))
+                MostrarMensaje($"Vegetal: { vegetal.ToString() }, cultivado con éxito.");
         }
 
         private static void RptInventario()
@@ -120,7 +115,7 @@ namespace PracticaPOO
 
         private static void ImprimirCultivos()
         {
-            coop.RptImprimirCultivos(); 
+            coop.RptImprimirCultivos();
         }
 
         public static void MostrarMensaje(string mensaje)

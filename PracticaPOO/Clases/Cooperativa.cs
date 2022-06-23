@@ -71,10 +71,7 @@ namespace PracticaPOO
 
         #region Producción
 
-        public void Cultivar(ProdVegetal producto)
-        { 
-            finca.Cultivar(producto);
-        }
+        public bool Cultivar(ProdVegetal producto) => finca.Cultivar(producto);
 
         #endregion
     }
