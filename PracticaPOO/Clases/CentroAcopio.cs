@@ -73,12 +73,12 @@ namespace PracticaPOO
 
 
 
-            tabla.SetHeaders("Producto", "Cantidad");
+            tabla.EstablecerEncabezados("Producto", "Cantidad");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
 
             foreach (var prod in productosPorTipo)
             {
-                tabla.AddRow(prod.Nombre, prod.Cantidad.ToString());
+                tabla.AñadirFila(prod.Nombre, prod.Cantidad.ToString());
             }
 
             Console.WriteLine(tabla.ToString());
@@ -92,9 +92,9 @@ namespace PracticaPOO
             }
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            tabla.ClearRows();
-            tabla.SetHeaders("Capacidad", "Existencias");
-            tabla.AddRow(Capacidad.ToString(), cant.ToString());
+            tabla.BorrarFilas();
+            tabla.EstablecerEncabezados("Capacidad", "Existencias");
+            tabla.AñadirFila(Capacidad.ToString(), cant.ToString());
 
             Console.WriteLine(tabla.ToString());
 

@@ -65,24 +65,37 @@ namespace PracticaPOO.Clases
             }
 
             //Me trae el lote y el producto.
-            tabla.ClearRows();
+            tabla.BorrarFilas();
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            tabla.SetHeaders("Lotes", "Producto");
+            tabla.EstablecerEncabezados("Lotes", "Producto");
+
+            //Si el espacio está vacío, imprime un string con el lote vacío
+            int lotesVacios = 0;
+            ProdVegetal pro = new ProdVegetal("<Vacío>", 0, 0);
+            if (lotes.Count < 5)
+            {
+                for (int i = lotes.Count; i < Capacidad; i++)
+                {
+                    lotesVacios++;
+                    lotes.Add(new Lote(cooperativa, pro));
+                }
+            }
 
             for (int i = 0; i < this.lotes.Count; i++)
             {
-                tabla.AddRow((i + 1).ToString(), this.lotes[i].Producto.ToString());
+                tabla.AñadirFila((i + 1).ToString(), this.lotes[i].Producto.ToString());
             }
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine(tabla.ToString());
 
             //Imprimir Existencias / Capacidad
-            tabla.ClearRows();
-            int cant = this.lotes.Count;
+            tabla.BorrarFilas();
+            
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            tabla.SetHeaders("Capacidad", "Produciendo");
-            tabla.AddRow(Capacidad.ToString(), cant.ToString());
+            int lotesProduciendo = TotalLotes - lotesVacios;
+            tabla.EstablecerEncabezados("Capacidad", "Produciendo");
+            tabla.AñadirFila(Capacidad.ToString().PadLeft(10), lotesProduciendo.ToString().PadLeft(10));
 
             Console.WriteLine(tabla.ToString());
 
