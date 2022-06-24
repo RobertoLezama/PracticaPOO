@@ -1,4 +1,6 @@
-﻿namespace PracticaPOO
+﻿using System;
+
+namespace PracticaPOO
 {
     public class Lote : IProductor
     {
@@ -21,6 +23,13 @@
             cooperativa.Gastar(producto.Precio);
 
             this.Producto = producto;
+        }
+
+        public Producto Cosechar()
+        {
+            Producto resultado = this.Producto;
+            this.Producto = null;
+            return resultado;
         }
     }
 }

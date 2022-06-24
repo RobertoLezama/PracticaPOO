@@ -1,15 +1,16 @@
 ﻿using ConsoleTable;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PracticaPOO.Clases
 {
     public class Finca
     {
-        Table tabla = new Table();
-        List<Lote> lotes;
-
         Cooperativa cooperativa;
+        List<Lote> lotes;
+        Table tabla = new Table();
+
         public int Capacidad { get; private set; }
 
         public int TotalLotes => lotes.Count;
@@ -18,25 +19,49 @@ namespace PracticaPOO.Clases
 
         public Finca(Cooperativa coop, int capacidad)
         {
+            //Guardar referencia a la cooperativa para futuro uso
             this.cooperativa = coop;
+
+            //Establecer capacidad
+            Capacidad = capacidad;
+
+            //Configurar Lotes
             this.lotes = new List<Lote>();
 
-            Capacidad = capacidad;
+            //Inicializar los lotes pre-existentes
+            for (int i = 0; i < capacidad; i++)
+            {
+                lotes.Add(new Lote(coop));
+            }
         }
 
         public bool Cultivar(Producto producto)
         {
             try
             {
-                if (lotes.Count >= Capacidad)
+                //Necesito determinar si hay lotes vacíos disponibles
+                Lote loteVacío = null;
+
+                foreach (var loteDisponible in this.lotes)
+                {
+                    if (loteDisponible.Producto == null)
+                    {
+                        loteVacío = loteDisponible;
+                        break;
+                    }
+                }
+
+                //Código equivalente más sencillo
+                //var loteVacío2 = lotes.FirstOrDefault(l => l.Producto == null);
+
+                if (loteVacío == null)
                 {
                     throw new Exception("No hay capacidad suficiente para Cultivar el producto: " + producto);
                 }
 
-                lotes.Add(new Lote(cooperativa, producto));
+                loteVacío.Producir(producto);
 
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -59,18 +84,7 @@ namespace PracticaPOO.Clases
         {
             Console.Clear();
 
-            int lotesVacios = 0;
-            ProdVegetal pro = new ProdVegetal("<Vacío>", 0, 0);
-            if (lotes.Count < 5)
-            {
-                for (int i = lotes.Count; i < Capacidad; i++)
-                {
-                    lotesVacios++;
-                    lotes.Add(new Lote(cooperativa, pro));
-                }
-            }
-
-           
+            //Margen Superior
             for (int i = 0; i < 5; i++)
             {
                 Console.WriteLine("");
@@ -82,21 +96,32 @@ namespace PracticaPOO.Clases
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             tabla.SetHeaders("Lotes", "Producto");
 
+            //Reporte de Lotes
             for (int i = 0; i < this.lotes.Count; i++)
             {
                 tabla.IsCentered = true;
-                tabla.AddRow((i + 1).ToString(), this.lotes[i].Producto.ToString().PadLeft(10));
 
+                string nombreProd;
+
+                if (this.lotes[i].Producto != null)
+                    nombreProd = lotes[i].Producto.ToString();
+                else
+                    nombreProd = "<Vacío>";
+
+                //string nombreProd = this.lotes[i].Producto?.ToString() ?? "<Vacío>";
+
+                tabla.AddRow((i + 1).ToString(), nombreProd.PadLeft(10));
             }
+
             tabla.IsCentered = true;
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine(tabla.ToString());
 
             //Imprimir Existencias / Capacidad
             tabla.ClearRows();
-            
+
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            int lotesProduciendo = TotalLotes - lotesVacios;
+            int lotesProduciendo = TotalLotes - 0;
             tabla.SetHeaders("Capacidad", "Produciendo");
             tabla.AddRow(Capacidad.ToString().PadLeft(10), lotesProduciendo.ToString().PadLeft(10));
             tabla.IsCentered = true;
