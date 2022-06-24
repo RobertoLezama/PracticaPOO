@@ -71,16 +71,17 @@ namespace PracticaPOO
                                   .Select(g => new { Nombre = g.Key, Cantidad = g.Count() })
                                   .OrderByDescending(p => p.Cantidad);
 
-
+            int maxNombre = productosPorTipo.Max(n => n.Nombre.Length);
 
             tabla.SetHeaders("Producto", "Cantidad");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
 
             foreach (var prod in productosPorTipo)
             {
-                tabla.AddRow(prod.Nombre, prod.Cantidad.ToString());
+                tabla.AddRow(prod.Nombre, prod.Cantidad.ToString().PadLeft(10));
+                tabla.IsCentered = true;
             }
-
+            //tabla.Margin = (Console.WindowWidth - (maxNombre * 4)) / 2;
             Console.WriteLine(tabla.ToString());
 
             //Imprimir Existencias / Capacidad
@@ -94,8 +95,8 @@ namespace PracticaPOO
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             tabla.ClearRows();
             tabla.SetHeaders("Capacidad", "Existencias");
-            tabla.AddRow(Capacidad.ToString(), cant.ToString());
-
+            tabla.AddRow(Capacidad.ToString().PadLeft(10), cant.ToString().PadLeft(10));
+            tabla.IsCentered = true;
             Console.WriteLine(tabla.ToString());
 
             Console.ForegroundColor = ConsoleColor.DarkRed;

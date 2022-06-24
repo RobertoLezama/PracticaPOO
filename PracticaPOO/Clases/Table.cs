@@ -22,9 +22,11 @@ namespace ConsoleTable
         private string[] _headers;
         private List<string[]> _rows = new List<string[]>();
 
+        public int Margin { get; set; } = 1;
         public int Padding { get; set; } = 1;
         public bool HeaderTextAlignRight { get; set; }
         public bool RowTextAlignRight { get; set; }
+        public bool IsCentered { get; set; }    
 
         public void SetHeaders(params string[] headers)
         {
@@ -49,7 +51,8 @@ namespace ConsoleTable
                 if (row.Length > maximumColumns)
                     maximumColumns = row.Length;
             }
-
+            if(IsCentered)
+                Margin = (Console.WindowWidth - (maximumColumns * 4)) / 2;
             var maximumCellWidths = new int[maximumColumns];
             for (int i = 0; i < maximumCellWidths.Count(); i++)
                 maximumCellWidths[i] = 0;
@@ -80,13 +83,13 @@ namespace ConsoleTable
             for (int i = 0; i < rowColumnCount; i++)
             {
                 if (i == 0 && i == rowColumnCount - 1)
-                    formattedTable.AppendLine(string.Format("{0}{1}{2}", TopLeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), TopRightJoint));
+                    formattedTable.AppendLine(string.Format(" ".PadLeft(Margin) + "{0}{1}{2}", TopLeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), TopRightJoint));
                 else if (i == 0)
-                    formattedTable.Append(string.Format("{0}{1}", TopLeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", TopLeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
                 else if (i == rowColumnCount - 1)
                     formattedTable.AppendLine(string.Format("{0}{1}{2}", TopJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), TopRightJoint));
                 else
-                    formattedTable.Append(string.Format("{0}{1}", TopJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", TopJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
             }
 
             return formattedTable;
@@ -97,13 +100,13 @@ namespace ConsoleTable
             for (int i = 0; i < rowColumnCount; i++)
             {
                 if (i == 0 && i == rowColumnCount - 1)
-                    formattedTable.AppendLine(string.Format("{0}{1}{2}", BottomLeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), BottomRightJoint));
+                    formattedTable.AppendLine(string.Format(" ".PadLeft(Margin) + "{0}{1}{2}", BottomLeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), BottomRightJoint));
                 else if (i == 0)
-                    formattedTable.Append(string.Format("{0}{1}", BottomLeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", BottomLeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
                 else if (i == rowColumnCount - 1)
                     formattedTable.AppendLine(string.Format("{0}{1}{2}", BottomJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), BottomRightJoint));
                 else
-                    formattedTable.Append(string.Format("{0}{1}", BottomJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", BottomJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
             }
 
             return formattedTable;
@@ -127,13 +130,13 @@ namespace ConsoleTable
                 var cellValue = alignRight ? column.PadLeft(restWidth, ' ') : column.PadRight(restWidth, ' ');
 
                 if (cellIndex == 0 && cellIndex == lastCellIndex)
-                    formattedTable.AppendLine(string.Format("{0}{1}{2}{3}{4}", VerticalLine, paddingString, cellValue, paddingString, VerticalLine));
+                    formattedTable.AppendLine(string.Format(" ".PadLeft(Margin) + "{0}{1}{2}{3}{4}", VerticalLine, paddingString, cellValue, paddingString, VerticalLine));
                 else if (cellIndex == 0)
-                    formattedTable.Append(string.Format("{0}{1}{2}{3}", VerticalLine, paddingString, cellValue, paddingString));
+                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}{2}{3}", VerticalLine, paddingString, cellValue, paddingString));
                 else if (cellIndex == lastCellIndex)
                     formattedTable.AppendLine(string.Format("{0}{1}{2}{3}{4}", VerticalLine, paddingString, cellValue, paddingString, VerticalLine));
                 else
-                    formattedTable.Append(string.Format("{0}{1}{2}{3}", VerticalLine, paddingString, cellValue, paddingString));
+                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}{2}{3}", VerticalLine, paddingString, cellValue, paddingString));
 
                 cellIndex++;
             }
@@ -149,11 +152,11 @@ namespace ConsoleTable
             {
                 if (i == 0 && i == maximumCells - 1)
                 {
-                    formattedTable.AppendLine(string.Format("{0}{1}{2}", LeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), RightJoint));
+                    formattedTable.AppendLine(string.Format(" ".PadLeft(Margin) + "{0}{1}{2}", LeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), RightJoint));
                 }
                 else if (i == 0)
                 {
-                    formattedTable.Append(string.Format("{0}{1}", LeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", LeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
                 }
                 else if (i == maximumCells - 1)
                 {
@@ -171,11 +174,11 @@ namespace ConsoleTable
                 else
                 {
                     if (i > previousRowColumnCount)
-                        formattedTable.Append(string.Format("{0}{1}", TopJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                        formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", TopJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
                     else if (i > rowColumnCount)
-                        formattedTable.Append(string.Format("{0}{1}", BottomJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                        formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", BottomJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
                     else
-                        formattedTable.Append(string.Format("{0}{1}", MiddleJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                        formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", MiddleJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
                 }
             }
 

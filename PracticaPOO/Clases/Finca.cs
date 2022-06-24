@@ -10,7 +10,6 @@ namespace PracticaPOO.Clases
         List<Lote> lotes;
 
         Cooperativa cooperativa;
-
         public int Capacidad { get; private set; }
 
         public int TotalLotes => lotes.Count;
@@ -35,6 +34,7 @@ namespace PracticaPOO.Clases
                 }
 
                 lotes.Add(new Lote(cooperativa, producto));
+
                 return true;
 
             }
@@ -42,7 +42,7 @@ namespace PracticaPOO.Clases
             {
                 MostrarMensaje("Se produjo un error: " + ex.Message);
                 Console.ReadKey();
-                return false; 
+                return false;
             }
         }
 
@@ -59,6 +59,18 @@ namespace PracticaPOO.Clases
         {
             Console.Clear();
 
+            int lotesVacios = 0;
+            ProdVegetal pro = new ProdVegetal("<Vacío>", 0, 0);
+            if (lotes.Count < 5)
+            {
+                for (int i = lotes.Count; i < Capacidad; i++)
+                {
+                    lotesVacios++;
+                    lotes.Add(new Lote(cooperativa, pro));
+                }
+            }
+
+           
             for (int i = 0; i < 5; i++)
             {
                 Console.WriteLine("");
@@ -66,23 +78,28 @@ namespace PracticaPOO.Clases
 
             //Me trae el lote y el producto.
             tabla.ClearRows();
+
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             tabla.SetHeaders("Lotes", "Producto");
 
             for (int i = 0; i < this.lotes.Count; i++)
             {
-                tabla.AddRow((i + 1).ToString(), this.lotes[i].Producto.ToString());
-            }
+                tabla.IsCentered = true;
+                tabla.AddRow((i + 1).ToString(), this.lotes[i].Producto.ToString().PadLeft(10));
 
+            }
+            tabla.IsCentered = true;
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine(tabla.ToString());
 
             //Imprimir Existencias / Capacidad
             tabla.ClearRows();
-            int cant = this.lotes.Count;
+            
             Console.ForegroundColor = ConsoleColor.DarkCyan;
+            int lotesProduciendo = TotalLotes - lotesVacios;
             tabla.SetHeaders("Capacidad", "Produciendo");
-            tabla.AddRow(Capacidad.ToString(), cant.ToString());
+            tabla.AddRow(Capacidad.ToString().PadLeft(10), lotesProduciendo.ToString().PadLeft(10));
+            tabla.IsCentered = true;
 
             Console.WriteLine(tabla.ToString());
 
