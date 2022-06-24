@@ -83,12 +83,12 @@ namespace PracticaPOO.Clases
 
             for (int i = 0; i < this.lotes.Count; i++)
             {
-                tabla.AñadirFila((i + 1).ToString(), this.lotes[i].Producto.ToString());
+                tabla.AñadirFila((i + 1).ToString(), this.lotes[i].Producto.ToString().PadLeft(10));
             }
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine(tabla.ToString());
-
+            
             //Imprimir Existencias / Capacidad
             tabla.BorrarFilas();
             
@@ -96,9 +96,10 @@ namespace PracticaPOO.Clases
             int lotesProduciendo = TotalLotes - lotesVacios;
             tabla.EstablecerEncabezados("Capacidad", "Produciendo");
             tabla.AñadirFila(Capacidad.ToString().PadLeft(10), lotesProduciendo.ToString().PadLeft(10));
+            
 
             Console.WriteLine(tabla.ToString());
-
+            
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("Presione cualquier tecla para continuar . . .");
 

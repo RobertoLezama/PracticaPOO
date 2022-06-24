@@ -78,7 +78,7 @@ namespace PracticaPOO
 
             foreach (var prod in productosPorTipo)
             {
-                tabla.AñadirFila(prod.Nombre, prod.Cantidad.ToString());
+                tabla.AñadirFila(prod.Nombre, prod.Cantidad.ToString().PadLeft(10));
             }
 
             Console.WriteLine(tabla.ToString());
@@ -94,7 +94,7 @@ namespace PracticaPOO
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             tabla.BorrarFilas();
             tabla.EstablecerEncabezados("Capacidad", "Existencias");
-            tabla.AñadirFila(Capacidad.ToString(), cant.ToString());
+            tabla.AñadirFila(Capacidad.ToString(), cant.ToString().PadLeft(10));
 
             Console.WriteLine(tabla.ToString());
 
