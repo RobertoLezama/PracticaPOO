@@ -1,4 +1,4 @@
-﻿using ConsoleTable;
+﻿using Consoletabla;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace PracticaPOO.Clases
     {
         Cooperativa cooperativa;
         List<Lote> lotes;
-        Table tabla = new Table();
+        Tabla tabla = new Tabla();
 
         public int Capacidad { get; private set; }
 
@@ -91,40 +91,44 @@ namespace PracticaPOO.Clases
             }
 
             //Me trae el lote y el producto.
-            tabla.ClearRows();
+            tabla.BorraFilas();
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            tabla.SetHeaders("Lotes", "Producto");
+            tabla.EstablacerTitulos("Lotes", "Producto");
 
+            int totalVacios = 0;
             //Reporte de Lotes
             for (int i = 0; i < this.lotes.Count; i++)
             {
-                tabla.IsCentered = true;
+                tabla.EstaCentrado = true;
 
                 string nombreProd;
 
                 if (this.lotes[i].Producto != null)
                     nombreProd = lotes[i].Producto.ToString();
                 else
+                {
                     nombreProd = "<Vacío>";
+                    totalVacios ++; 
+                }
 
                 //string nombreProd = this.lotes[i].Producto?.ToString() ?? "<Vacío>";
 
-                tabla.AddRow((i + 1).ToString(), nombreProd.PadLeft(10));
+                tabla.AgregarFila((i + 1).ToString(), nombreProd.PadLeft(10));
             }
 
-            tabla.IsCentered = true;
+            tabla.EstaCentrado = true;
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.WriteLine(tabla.ToString());
 
             //Imprimir Existencias / Capacidad
-            tabla.ClearRows();
+            tabla.BorraFilas();
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            int lotesProduciendo = TotalLotes - 0;
-            tabla.SetHeaders("Capacidad", "Produciendo");
-            tabla.AddRow(Capacidad.ToString().PadLeft(10), lotesProduciendo.ToString().PadLeft(10));
-            tabla.IsCentered = true;
+            int lotesProduciendo = TotalLotes - totalVacios;
+            tabla.EstablacerTitulos("Capacidad", "Produciendo");
+            tabla.AgregarFila(Capacidad.ToString().PadLeft(10), lotesProduciendo.ToString().PadLeft(10));
+            tabla.EstaCentrado = true;
 
             Console.WriteLine(tabla.ToString());
 

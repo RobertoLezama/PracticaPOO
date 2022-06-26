@@ -1,4 +1,4 @@
-﻿using ConsoleTable;
+﻿using Consoletabla;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ namespace PracticaPOO
 {
     public class CentroAcopio
     {
-        Table tabla;
+        Tabla tabla;
         List<Producto> productos;
 
         public int Capacidad { get; private set; }
@@ -26,7 +26,7 @@ namespace PracticaPOO
 
             productos = new List<Producto>();
 
-            tabla = new Table();
+            tabla = new Tabla();
         }
 
         public bool GuardarProducto(Producto prod)
@@ -73,13 +73,13 @@ namespace PracticaPOO
 
             int maxNombre = productosPorTipo.Max(n => n.Nombre.Length);
 
-            tabla.SetHeaders("Producto", "Cantidad");
+            tabla.EstablacerTitulos("Producto", "Cantidad");
             Console.ForegroundColor = ConsoleColor.DarkCyan;
 
             foreach (var prod in productosPorTipo)
             {
-                tabla.AddRow(prod.Nombre, prod.Cantidad.ToString().PadLeft(10));
-                tabla.IsCentered = true;
+                tabla.AgregarFila(prod.Nombre, prod.Cantidad.ToString().PadLeft(10));
+                tabla.EstaCentrado = true;
             }
             //tabla.Margin = (Console.WindowWidth - (maxNombre * 4)) / 2;
             Console.WriteLine(tabla.ToString());
@@ -93,10 +93,10 @@ namespace PracticaPOO
             }
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            tabla.ClearRows();
-            tabla.SetHeaders("Capacidad", "Existencias");
-            tabla.AddRow(Capacidad.ToString().PadLeft(10), cant.ToString().PadLeft(10));
-            tabla.IsCentered = true;
+            tabla.BorraFilas();
+            tabla.EstablacerTitulos("Capacidad", "Existencias");
+            tabla.AgregarFila(Capacidad.ToString().PadLeft(10), cant.ToString().PadLeft(10));
+            tabla.EstaCentrado = true;
             Console.WriteLine(tabla.ToString());
 
             Console.ForegroundColor = ConsoleColor.DarkRed;

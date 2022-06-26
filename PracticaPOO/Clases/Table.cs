@@ -3,241 +3,241 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ConsoleTable
+namespace Consoletabla
 {
-    public class Table
+    public class Tabla
     {
-        private const string TopLeftJoint = "┌";
-        private const string TopRightJoint = "┐";
-        private const string BottomLeftJoint = "└";
-        private const string BottomRightJoint = "┘";
-        private const string TopJoint = "┬";
-        private const string BottomJoint = "┴";
-        private const string LeftJoint = "├";
-        private const string MiddleJoint = "┼";
-        private const string RightJoint = "┤";
-        private const char HorizontalLine = '─';
-        private const string VerticalLine = "│";
+        private const string EsquinaSuperiorIzquierda = "┌";
+        private const string EsquinaSuperiorDerecha = "┐";
+        private const string EsquinaInferiorIzquierda = "└";
+        private const string EsquinaInferiorDerecha = "┘";
+        private const string UnionSuperior = "┬";
+        private const string UnionInferior = "┴";
+        private const string UnionIzquierda = "├";
+        private const string UnionMedio = "┼";
+        private const string UnionDerecha = "┤";
+        private const char LineaHorizontal = '─';
+        private const string LineaVertical = "│";
 
-        private string[] _headers;
-        private List<string[]> _rows = new List<string[]>();
+        private string[] _titulos;
+        private List<string[]> _filas = new List<string[]>();
 
-        public int Margin { get; set; } = 1;
-        public int Padding { get; set; } = 1;
-        public bool HeaderTextAlignRight { get; set; }
-        public bool RowTextAlignRight { get; set; }
-        public bool IsCentered { get; set; }    
+        public int Margen { get; set; } = 1;
+        public int Separacion { get; set; } = 1;
+        public bool AlineacionDerechaDeTitulo { get; set; }
+        public bool AlineacionDerechaDeFila { get; set; }
+        public bool EstaCentrado { get; set; }    
 
-        public void SetHeaders(params string[] headers)
+        public void EstablacerTitulos(params string[] titulos)
         {
-            _headers = headers;
+            _titulos = titulos;
         }
 
-        public void AddRow(params string[] row)
+        public void AgregarFila(params string[] fila)
         {
-            _rows.Add(row);
+            _filas.Add(fila);
         }
 
-        public void ClearRows()
+        public void BorraFilas()
         {
-            _rows.Clear();
+            _filas.Clear();
         }
 
-        private int[] GetMaxCellWidths(List<string[]> table)
+        private int[] ObtenerAnchoMaximo(List<string[]> tabla)
         {
-            var maximumColumns = 0;
-            foreach (var row in table)
+            var maximoColumnas = 0;
+            foreach (var fila in tabla)
             {
-                if (row.Length > maximumColumns)
-                    maximumColumns = row.Length;
+                if (fila.Length > maximoColumnas)
+                   maximoColumnas = fila.Length;
             }
-            if(IsCentered)
-                Margin = (Console.WindowWidth - (maximumColumns * 4)) / 2;
-            var maximumCellWidths = new int[maximumColumns];
-            for (int i = 0; i < maximumCellWidths.Count(); i++)
-                maximumCellWidths[i] = 0;
+            if(EstaCentrado)
+                Margen = (Console.WindowWidth - (maximoColumnas * 4)) / 2;
+            var maximoCeldas = new int[maximoColumnas];
+            for (int i = 0; i < maximoCeldas.Count(); i++)
+                maximoCeldas[i] = 0;
 
-            var paddingCount = 0;
-            if (Padding > 0)
+            var TotalSeparacion = 0;
+            if (Separacion > 0)
             {
-                //Padding is left and right
-                paddingCount = Padding * 2;
+                //Separacion es izquierda y derecha
+                TotalSeparacion = Separacion * 2;
             }
 
-            foreach (var row in table)
+            foreach (var fila in tabla)
             {
-                for (int i = 0; i < row.Length; i++)
+                for (int i = 0; i < fila.Length; i++)
                 {
-                    var maxWidth = row[i].Length + paddingCount;
+                    var anchoMaximo = fila[i].Length + TotalSeparacion;
 
-                    if (maxWidth > maximumCellWidths[i])
-                        maximumCellWidths[i] = maxWidth;
+                    if (anchoMaximo > maximoCeldas[i])
+                        maximoCeldas[i] = anchoMaximo;
                 }
             }
 
-            return maximumCellWidths;
+            return maximoCeldas;
         }
 
-        private StringBuilder CreateTopLine(int[] maximumCellWidths, int rowColumnCount, StringBuilder formattedTable)
+        private StringBuilder CrearLineaSuperior(int[] anchoMaximo, int totalColumnasPorFila, StringBuilder formatearTabla)
         {
-            for (int i = 0; i < rowColumnCount; i++)
+            for (int i = 0; i < totalColumnasPorFila; i++)
             {
-                if (i == 0 && i == rowColumnCount - 1)
-                    formattedTable.AppendLine(string.Format(" ".PadLeft(Margin) + "{0}{1}{2}", TopLeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), TopRightJoint));
+                if (i == 0 && i == totalColumnasPorFila - 1)
+                    formatearTabla.AppendLine(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}", EsquinaSuperiorIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaSuperiorDerecha));
                 else if (i == 0)
-                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", TopLeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
-                else if (i == rowColumnCount - 1)
-                    formattedTable.AppendLine(string.Format("{0}{1}{2}", TopJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), TopRightJoint));
+                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}", EsquinaSuperiorIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
+                else if (i == totalColumnasPorFila - 1)
+                    formatearTabla.AppendLine(string.Format("{0}{1}{2}", UnionSuperior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaSuperiorDerecha));
                 else
-                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", TopJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}", UnionSuperior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
             }
 
-            return formattedTable;
+            return formatearTabla;
         }
 
-        private StringBuilder CreateBottomLine(int[] maximumCellWidths, int rowColumnCount, StringBuilder formattedTable)
+        private StringBuilder CrearLineaInferior(int[] anchoMaximo, int totalColumnasPorFila, StringBuilder formatearTabla)
         {
-            for (int i = 0; i < rowColumnCount; i++)
+            for (int i = 0; i < totalColumnasPorFila; i++)
             {
-                if (i == 0 && i == rowColumnCount - 1)
-                    formattedTable.AppendLine(string.Format(" ".PadLeft(Margin) + "{0}{1}{2}", BottomLeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), BottomRightJoint));
+                if (i == 0 && i == totalColumnasPorFila - 1)
+                    formatearTabla.AppendLine(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}", EsquinaInferiorIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaInferiorDerecha));
                 else if (i == 0)
-                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", BottomLeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
-                else if (i == rowColumnCount - 1)
-                    formattedTable.AppendLine(string.Format("{0}{1}{2}", BottomJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), BottomRightJoint));
+                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}", EsquinaInferiorIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
+                else if (i == totalColumnasPorFila - 1)
+                    formatearTabla.AppendLine(string.Format("{0}{1}{2}",UnionInferior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaInferiorDerecha));
                 else
-                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", BottomJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}",UnionInferior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
             }
 
-            return formattedTable;
+            return formatearTabla;
         }
 
-        private StringBuilder CreateValueLine(int[] maximumCellWidths, string[] row, bool alignRight, StringBuilder formattedTable)
+        private StringBuilder CrearLineaDeValor(int[] anchoMaximo, string[] fila, bool alineacionDerecha, StringBuilder formatearTabla)
         {
-            int cellIndex = 0;
-            int lastCellIndex = row.Length - 1;
+            int indiceCelda = 0;
+            int ultimaCelda = fila.Length - 1;
 
-            var paddingString = string.Empty;
-            if (Padding > 0)
-                paddingString = string.Concat(Enumerable.Repeat(' ', Padding));
+            var SeparacionTexto = string.Empty;
+            if (Separacion > 0)
+                SeparacionTexto = string.Concat(Enumerable.Repeat(' ', Separacion));
 
-            foreach (var column in row)
+            foreach (var columna in fila)
             {
-                var restWidth = maximumCellWidths[cellIndex];
-                if (Padding > 0)
-                    restWidth -= Padding * 2;
+                var anchoRestante = anchoMaximo[indiceCelda];
+                if (Separacion > 0)
+                    anchoRestante -= Separacion * 2;
 
-                var cellValue = alignRight ? column.PadLeft(restWidth, ' ') : column.PadRight(restWidth, ' ');
+                var valorDeCelda = alineacionDerecha ? columna.PadLeft(anchoRestante, ' ') : columna.PadRight(anchoRestante, ' ');
 
-                if (cellIndex == 0 && cellIndex == lastCellIndex)
-                    formattedTable.AppendLine(string.Format(" ".PadLeft(Margin) + "{0}{1}{2}{3}{4}", VerticalLine, paddingString, cellValue, paddingString, VerticalLine));
-                else if (cellIndex == 0)
-                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}{2}{3}", VerticalLine, paddingString, cellValue, paddingString));
-                else if (cellIndex == lastCellIndex)
-                    formattedTable.AppendLine(string.Format("{0}{1}{2}{3}{4}", VerticalLine, paddingString, cellValue, paddingString, VerticalLine));
+                if (indiceCelda == 0 && indiceCelda == ultimaCelda)
+                    formatearTabla.AppendLine(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}{3}{4}", LineaVertical, SeparacionTexto, valorDeCelda, SeparacionTexto, LineaVertical));
+                else if (indiceCelda == 0)
+                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}{3}", LineaVertical, SeparacionTexto, valorDeCelda, SeparacionTexto));
+                else if (indiceCelda == ultimaCelda)
+                    formatearTabla.AppendLine(string.Format("{0}{1}{2}{3}{4}", LineaVertical, SeparacionTexto, valorDeCelda, SeparacionTexto, LineaVertical));
                 else
-                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}{2}{3}", VerticalLine, paddingString, cellValue, paddingString));
+                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}{3}", LineaVertical, SeparacionTexto, valorDeCelda, SeparacionTexto));
 
-                cellIndex++;
+                indiceCelda++;
             }
 
-            return formattedTable;
+            return formatearTabla;
         }
 
-        private StringBuilder CreateSeperatorLine(int[] maximumCellWidths, int previousRowColumnCount, int rowColumnCount, StringBuilder formattedTable)
+        private StringBuilder CrearLineaDeSeparacion(int[] anchoMaximo, int TotalAnteriorColumnasFila, int totalColumnasPorFila, StringBuilder formatearTabla)
         {
-            var maximumCells = Math.Max(previousRowColumnCount, rowColumnCount);
+            var maximoCeldas = Math.Max(TotalAnteriorColumnasFila, totalColumnasPorFila);
 
-            for (int i = 0; i < maximumCells; i++)
+            for (int i = 0; i < maximoCeldas; i++)
             {
-                if (i == 0 && i == maximumCells - 1)
+                if (i == 0 && i == maximoCeldas - 1)
                 {
-                    formattedTable.AppendLine(string.Format(" ".PadLeft(Margin) + "{0}{1}{2}", LeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), RightJoint));
+                    formatearTabla.AppendLine(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}",UnionIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), UnionDerecha));
                 }
                 else if (i == 0)
                 {
-                    formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", LeftJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}",UnionIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
                 }
-                else if (i == maximumCells - 1)
+                else if (i == maximoCeldas - 1)
                 {
-                    if (i > previousRowColumnCount)
-                        formattedTable.AppendLine(string.Format("{0}{1}{2}", TopJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), TopRightJoint));
-                    else if (i > rowColumnCount)
-                        formattedTable.AppendLine(string.Format("{0}{1}{2}", BottomJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), BottomRightJoint));
-                    else if (i > previousRowColumnCount - 1)
-                        formattedTable.AppendLine(string.Format("{0}{1}{2}", MiddleJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), TopRightJoint));
-                    else if (i > rowColumnCount - 1)
-                        formattedTable.AppendLine(string.Format("{0}{1}{2}", MiddleJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), BottomRightJoint));
+                    if (i > TotalAnteriorColumnasFila)
+                        formatearTabla.AppendLine(string.Format("{0}{1}{2}", UnionSuperior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaSuperiorDerecha));
+                    else if (i > totalColumnasPorFila)
+                        formatearTabla.AppendLine(string.Format("{0}{1}{2}",UnionInferior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaInferiorDerecha));
+                    else if (i > TotalAnteriorColumnasFila - 1)
+                        formatearTabla.AppendLine(string.Format("{0}{1}{2}",UnionMedio, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaSuperiorDerecha));
+                    else if (i > totalColumnasPorFila - 1)
+                        formatearTabla.AppendLine(string.Format("{0}{1}{2}",UnionMedio, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaInferiorDerecha));
                     else
-                        formattedTable.AppendLine(string.Format("{0}{1}{2}", MiddleJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine), RightJoint));
+                        formatearTabla.AppendLine(string.Format("{0}{1}{2}",UnionMedio, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), UnionDerecha));
                 }
                 else
                 {
-                    if (i > previousRowColumnCount)
-                        formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", TopJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
-                    else if (i > rowColumnCount)
-                        formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", BottomJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                    if (i > TotalAnteriorColumnasFila)
+                        formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}", UnionSuperior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
+                    else if (i > totalColumnasPorFila)
+                        formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}",UnionInferior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
                     else
-                        formattedTable.Append(string.Format(" ".PadLeft(Margin) + "{0}{1}", MiddleJoint, string.Empty.PadLeft(maximumCellWidths[i], HorizontalLine)));
+                        formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}",UnionMedio, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
                 }
             }
 
-            return formattedTable;
+            return formatearTabla;
         }
 
         public override string ToString()
         {
-            var table = new List<string[]>();
+            var tabla = new List<string[]>();
 
-            var firstRowIsHeader = false;
-            if (_headers?.Any() == true)
+            var primerFilaEsTitulo = false;
+            if (_titulos?.Any() == true)
             {
-                table.Add(_headers);
-                firstRowIsHeader = true;
+                tabla.Add(_titulos);
+                primerFilaEsTitulo = true;
             }
 
-            if (_rows?.Any() == true)
-                table.AddRange(_rows);
+            if (_filas?.Any() == true)
+                tabla.AddRange(_filas);
 
-            if (!table.Any())
+            if (!tabla.Any())
                 return string.Empty;
 
-            var formattedTable = new StringBuilder();
+            var formatearTabla = new StringBuilder();
 
-            var previousRow = table.FirstOrDefault();
-            var nextRow = table.FirstOrDefault();
+            var filaAnterior = tabla.FirstOrDefault();
+            var filaSiguiente = tabla.FirstOrDefault();
 
-            int[] maximumCellWidths = GetMaxCellWidths(table);
+            int[] anchoMaximo = ObtenerAnchoMaximo(tabla);
 
-            formattedTable = CreateTopLine(maximumCellWidths, nextRow.Count(), formattedTable);
+            formatearTabla = CrearLineaSuperior(anchoMaximo,filaSiguiente.Count(), formatearTabla);
 
-            int rowIndex = 0;
-            int lastRowIndex = table.Count - 1;
+            int indiceDeFila = 0;
+            int ultimoIndiceFila = tabla.Count - 1;//A la tabla le quita 1 para saber que va a dibujar la ultima fila.
 
-            for (int i = 0; i < table.Count; i++)
+            for (int i = 0; i < tabla.Count; i++)
             {
-                var row = table[i];
+                var fila = tabla[i];
 
-                var align = RowTextAlignRight;
-                if (i == 0 && firstRowIsHeader)
-                    align = HeaderTextAlignRight;
+                var alinear =AlineacionDerechaDeFila;
+                if (i == 0 && primerFilaEsTitulo)
+                    alinear = AlineacionDerechaDeTitulo;
 
-                formattedTable = CreateValueLine(maximumCellWidths, row, align, formattedTable);
+                formatearTabla = CrearLineaDeValor(anchoMaximo, fila, alinear, formatearTabla);
 
-                previousRow = row;
+               filaAnterior = fila;
 
-                if (rowIndex != lastRowIndex)
+                if (indiceDeFila != ultimoIndiceFila)
                 {
-                    nextRow = table[rowIndex + 1];
-                    formattedTable = CreateSeperatorLine(maximumCellWidths, previousRow.Count(), nextRow.Count(), formattedTable);
+                   filaSiguiente = tabla[indiceDeFila + 1];
+                    formatearTabla = CrearLineaDeSeparacion(anchoMaximo,filaAnterior.Count(),filaSiguiente.Count(), formatearTabla);
                 }
 
-                rowIndex++;
+                indiceDeFila++;
             }
 
-            formattedTable = CreateBottomLine(maximumCellWidths, previousRow.Count(), formattedTable);
+            formatearTabla = CrearLineaInferior(anchoMaximo,filaAnterior.Count(), formatearTabla);
 
-            return formattedTable.ToString();
+            return formatearTabla.ToString();
         }
     }
 }
