@@ -51,8 +51,7 @@ namespace Consoletabla
                 if (fila.Length > maximoColumnas)
                    maximoColumnas = fila.Length;
             }
-            if(EstaCentrado)
-                Margen = (Console.WindowWidth - (maximoColumnas * 4)) / 2;
+            
             var maximoCeldas = new int[maximoColumnas];
             for (int i = 0; i < maximoCeldas.Count(); i++)
                 maximoCeldas[i] = 0;
@@ -64,6 +63,7 @@ namespace Consoletabla
                 TotalSeparacion = Separacion * 2;
             }
 
+            int valorMaximo = 0;
             foreach (var fila in tabla)
             {
                 for (int i = 0; i < fila.Length; i++)
@@ -71,10 +71,15 @@ namespace Consoletabla
                     var anchoMaximo = fila[i].Length + TotalSeparacion;
 
                     if (anchoMaximo > maximoCeldas[i])
+                    {
                         maximoCeldas[i] = anchoMaximo;
+                        valorMaximo = anchoMaximo;
+                    }
+                        
                 }
             }
-
+            if (EstaCentrado)
+                Margen = (Console.WindowWidth - valorMaximo) / 2;
             return maximoCeldas;
         }
 
