@@ -78,46 +78,48 @@ namespace Consoletabla
                         
                 }
             }
+            //Se toma el valor maximo de cada columna para centrar la tabla.
             if (EstaCentrado)
                 Margen = (Console.WindowWidth - valorMaximo) / 2;
+
             return maximoCeldas;
         }
 
-        private StringBuilder CrearLineaSuperior(int[] anchoMaximo, int totalColumnasPorFila, StringBuilder formatearTabla)
+        private StringBuilder CrearLineaSuperior(int[] anchoMaximo, int totalColumnasPorFila, StringBuilder tablaFormateada)
         {
             for (int i = 0; i < totalColumnasPorFila; i++)
             {
                 if (i == 0 && i == totalColumnasPorFila - 1)
-                    formatearTabla.AppendLine(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}", EsquinaSuperiorIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaSuperiorDerecha));
+                    tablaFormateada.AppendLine(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}", EsquinaSuperiorIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaSuperiorDerecha));
                 else if (i == 0)
-                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}", EsquinaSuperiorIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
+                    tablaFormateada.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}", EsquinaSuperiorIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
                 else if (i == totalColumnasPorFila - 1)
-                    formatearTabla.AppendLine(string.Format("{0}{1}{2}", UnionSuperior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaSuperiorDerecha));
+                    tablaFormateada.AppendLine(string.Format("{0}{1}{2}", UnionSuperior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaSuperiorDerecha));
                 else
-                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}", UnionSuperior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
+                    tablaFormateada.Append(string.Format("{0}{1}", UnionSuperior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
             }
 
-            return formatearTabla;
+            return tablaFormateada;
         }
 
-        private StringBuilder CrearLineaInferior(int[] anchoMaximo, int totalColumnasPorFila, StringBuilder formatearTabla)
+        private StringBuilder CrearLineaInferior(int[] anchoMaximo, int totalColumnasPorFila, StringBuilder tablaFormateada)
         {
             for (int i = 0; i < totalColumnasPorFila; i++)
             {
                 if (i == 0 && i == totalColumnasPorFila - 1)
-                    formatearTabla.AppendLine(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}", EsquinaInferiorIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaInferiorDerecha));
+                    tablaFormateada.AppendLine(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}", EsquinaInferiorIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaInferiorDerecha));
                 else if (i == 0)
-                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}", EsquinaInferiorIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
+                    tablaFormateada.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}", EsquinaInferiorIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
                 else if (i == totalColumnasPorFila - 1)
-                    formatearTabla.AppendLine(string.Format("{0}{1}{2}",UnionInferior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaInferiorDerecha));
+                    tablaFormateada.AppendLine(string.Format("{0}{1}{2}",UnionInferior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaInferiorDerecha));
                 else
-                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}",UnionInferior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
+                    tablaFormateada.Append(string.Format("{0}{1}",UnionInferior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
             }
 
-            return formatearTabla;
+            return tablaFormateada;
         }
 
-        private StringBuilder CrearLineaDeValor(int[] anchoMaximo, string[] fila, bool alineacionDerecha, StringBuilder formatearTabla)
+        private StringBuilder CrearLineaDeValor(int[] anchoMaximo, string[] fila, bool alineacionDerecha, StringBuilder tablaFormateada)
         {
             int indiceCelda = 0;
             int ultimaCelda = fila.Length - 1;
@@ -135,21 +137,21 @@ namespace Consoletabla
                 var valorDeCelda = alineacionDerecha ? columna.PadLeft(anchoRestante, ' ') : columna.PadRight(anchoRestante, ' ');
 
                 if (indiceCelda == 0 && indiceCelda == ultimaCelda)
-                    formatearTabla.AppendLine(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}{3}{4}", LineaVertical, SeparacionTexto, valorDeCelda, SeparacionTexto, LineaVertical));
+                    tablaFormateada.AppendLine(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}{3}{4}", LineaVertical, SeparacionTexto, valorDeCelda, SeparacionTexto, LineaVertical));
                 else if (indiceCelda == 0)
-                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}{3}", LineaVertical, SeparacionTexto, valorDeCelda, SeparacionTexto));
+                    tablaFormateada.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}{3}", LineaVertical, SeparacionTexto, valorDeCelda, SeparacionTexto));
                 else if (indiceCelda == ultimaCelda)
-                    formatearTabla.AppendLine(string.Format("{0}{1}{2}{3}{4}", LineaVertical, SeparacionTexto, valorDeCelda, SeparacionTexto, LineaVertical));
+                    tablaFormateada.AppendLine(string.Format("{0}{1}{2}{3}{4}", LineaVertical, SeparacionTexto, valorDeCelda, SeparacionTexto, LineaVertical));
                 else
-                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}{3}", LineaVertical, SeparacionTexto, valorDeCelda, SeparacionTexto));
+                    tablaFormateada.Append(string.Format("{0}{1}{2}{3}", LineaVertical, SeparacionTexto, valorDeCelda, SeparacionTexto));
 
                 indiceCelda++;
             }
 
-            return formatearTabla;
+            return tablaFormateada;
         }
 
-        private StringBuilder CrearLineaDeSeparacion(int[] anchoMaximo, int TotalAnteriorColumnasFila, int totalColumnasPorFila, StringBuilder formatearTabla)
+        private StringBuilder CrearLineaDeSeparacion(int[] anchoMaximo, int TotalAnteriorColumnasFila, int totalColumnasPorFila, StringBuilder tablaFormateada)
         {
             var maximoCeldas = Math.Max(TotalAnteriorColumnasFila, totalColumnasPorFila);
 
@@ -157,37 +159,37 @@ namespace Consoletabla
             {
                 if (i == 0 && i == maximoCeldas - 1)
                 {
-                    formatearTabla.AppendLine(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}",UnionIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), UnionDerecha));
+                    tablaFormateada.AppendLine(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}{2}",UnionIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), UnionDerecha));
                 }
                 else if (i == 0)
                 {
-                    formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}",UnionIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
+                    tablaFormateada.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}",UnionIzquierda, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
                 }
                 else if (i == maximoCeldas - 1)
                 {
                     if (i > TotalAnteriorColumnasFila)
-                        formatearTabla.AppendLine(string.Format("{0}{1}{2}", UnionSuperior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaSuperiorDerecha));
+                        tablaFormateada.AppendLine(string.Format("{0}{1}{2}", UnionSuperior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaSuperiorDerecha));
                     else if (i > totalColumnasPorFila)
-                        formatearTabla.AppendLine(string.Format("{0}{1}{2}",UnionInferior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaInferiorDerecha));
+                        tablaFormateada.AppendLine(string.Format("{0}{1}{2}",UnionInferior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaInferiorDerecha));
                     else if (i > TotalAnteriorColumnasFila - 1)
-                        formatearTabla.AppendLine(string.Format("{0}{1}{2}",UnionMedio, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaSuperiorDerecha));
+                        tablaFormateada.AppendLine(string.Format("{0}{1}{2}",UnionMedio, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaSuperiorDerecha));
                     else if (i > totalColumnasPorFila - 1)
-                        formatearTabla.AppendLine(string.Format("{0}{1}{2}",UnionMedio, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaInferiorDerecha));
+                        tablaFormateada.AppendLine(string.Format("{0}{1}{2}",UnionMedio, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), EsquinaInferiorDerecha));
                     else
-                        formatearTabla.AppendLine(string.Format("{0}{1}{2}",UnionMedio, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), UnionDerecha));
+                        tablaFormateada.AppendLine(string.Format("{0}{1}{2}",UnionMedio, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal), UnionDerecha));
                 }
                 else
                 {
                     if (i > TotalAnteriorColumnasFila)
-                        formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}", UnionSuperior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
+                        tablaFormateada.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}", UnionSuperior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
                     else if (i > totalColumnasPorFila)
-                        formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}",UnionInferior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
+                        tablaFormateada.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}",UnionInferior, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
                     else
-                        formatearTabla.Append(string.Format(string.Empty.PadLeft(Margen) + "{0}{1}",UnionMedio, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
+                        tablaFormateada.Append(string.Format("{0}{1}",UnionMedio, string.Empty.PadLeft(anchoMaximo[i], LineaHorizontal)));
                 }
             }
 
-            return formatearTabla;
+            return tablaFormateada;
         }
 
         public override string ToString()
@@ -207,14 +209,14 @@ namespace Consoletabla
             if (!tabla.Any())
                 return string.Empty;
 
-            var formatearTabla = new StringBuilder();
+            var tablaFormateada = new StringBuilder();
 
             var filaAnterior = tabla.FirstOrDefault();
             var filaSiguiente = tabla.FirstOrDefault();
 
             int[] anchoMaximo = ObtenerAnchoMaximo(tabla);
 
-            formatearTabla = CrearLineaSuperior(anchoMaximo,filaSiguiente.Count(), formatearTabla);
+            tablaFormateada = CrearLineaSuperior(anchoMaximo,filaSiguiente.Count(), tablaFormateada);
 
             int indiceDeFila = 0;
             int ultimoIndiceFila = tabla.Count - 1;//A la tabla le quita 1 para saber que va a dibujar la ultima fila.
@@ -227,22 +229,22 @@ namespace Consoletabla
                 if (i == 0 && primerFilaEsTitulo)
                     alinear = AlineacionDerechaDeTitulo;
 
-                formatearTabla = CrearLineaDeValor(anchoMaximo, fila, alinear, formatearTabla);
+                tablaFormateada = CrearLineaDeValor(anchoMaximo, fila, alinear, tablaFormateada);
 
                filaAnterior = fila;
 
                 if (indiceDeFila != ultimoIndiceFila)
                 {
                    filaSiguiente = tabla[indiceDeFila + 1];
-                    formatearTabla = CrearLineaDeSeparacion(anchoMaximo,filaAnterior.Count(),filaSiguiente.Count(), formatearTabla);
+                    tablaFormateada = CrearLineaDeSeparacion(anchoMaximo,filaAnterior.Count(),filaSiguiente.Count(), tablaFormateada);
                 }
 
                 indiceDeFila++;
             }
 
-            formatearTabla = CrearLineaInferior(anchoMaximo,filaAnterior.Count(), formatearTabla);
+            tablaFormateada = CrearLineaInferior(anchoMaximo,filaAnterior.Count(), tablaFormateada);
 
-            return formatearTabla.ToString();
+            return tablaFormateada.ToString();
         }
     }
 }

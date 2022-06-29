@@ -94,7 +94,7 @@ namespace PracticaPOO
 
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             tabla.BorraFilas();
-            tabla.EstablacerTitulos("Capacidad", "Existencias");
+            tabla.EstablacerTitulos("Capacidad", "Existencias","111");
             tabla.AgregarFila(Capacidad.ToString().PadLeft(10), cant.ToString().PadLeft(10));
             tabla.EstaCentrado = true;
             Console.WriteLine(tabla.ToString());
